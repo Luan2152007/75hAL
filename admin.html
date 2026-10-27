@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>ADMIN VIP 3D - SUPER CONTROL CENTER</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<style>
+@keyframes rainbowGlow {
+  0%   { --glow-color: #ffd76a; --border-color: #ffd76a; }
+  25%  { --glow-color: #38e8ff; --border-color: #38e8ff; }
+  50%  { --glow-color: #00e676; --border-color: #00e676; }
+  75%  { --glow-color: #ff3d67; --border-color: #ff3d67; }
+  100% { --glow-color: #ffd76a; --border-color: #ffd76a; }
+}
+
+:root {
+  --bg-gradient: radial-gradient(circle at 50% 0%, #15091d 0%, #08030e 60%, #020105 100%);
+  --panel-bg: rgba(20, 10, 30, 0.85);
+  --gold: #ffd76a;
+  --cyan: #38e8ff;
+  --pink: #ff4fd8;
+  --red: #ff3d67;
+  --green: #00e676;
+  --glow-color: #ffd76a;
+  --border-color: #ffd76a;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-gradient);
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  animation: rainbowGlow 12s infinite linear;
+}
+
+.admin-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 15px;
+}
+
+/* GLASS PANEL */
+.glass-panel {
+  background: var(--panel-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px var(--glow-color);
+  padding: 16px;
+}
+
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.status-badge {
+  background: rgba(0, 230, 118, 0.15);
+  border: 1px solid var(--green);
+  color: var(--green);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: bold;
+}
+
+/* STATS GRID */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.stat-card {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 12px;
+  padding: 12px;
+}
+.stat-card .lbl { font-size: 10px; color: #aaa; }
+.stat-card .val { font-size: 18px; font-weight: 900; color: var(--gold); margin-top: 4px; }
+
+/* CONTROL GRID */
+.main-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+@media (max-width: 768px) { .main-grid { grid-template-columns: 1fr; } }
+
+.control-btn {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  font-weight: bold;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+  border: 0;
+  margin-top: 6px;
+}
+
+.btn-tai { background: linear-gradient(135deg, #ff4fd8, #b80086); color: #fff; box-shadow: 0 0 10px #ff4fd8; }
+.btn-xiu { background: linear-gradient(135deg, #38e8ff, #0088cc); color: #000; box-shadow: 0 0 10px #38e8ff; }
+.btn-nohu { background: linear-gradient(135deg, #ffd76a, #ff9100); color: #000; box-shadow: 0 0 10px #ffd76a; }
+.btn-danger { background: linear-gradient(135deg, #ff3d67, #c2185b); color: #fff; box-shadow: 0 0 10px #ff3d67; }
+
+.form-input {
+  width: 100%;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  padding: 8px;
+  border-radius: 8px;
+  font-size: 11px;
+  outline: none;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+
+/* DATA TABLE */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 11px;
+  margin-top: 10px;
+}
+.data-table th, .data-table td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.data-table th { color: var(--gold); }
+</style>
+</head>
+<body>
+
+<div class="admin-container">
+  <!-- TOP NAV -->
+  <div class="glass-panel admin-header">
+    <div>
+      <h1 class="text-xl font-extrabold text-amber-300">🛡️ GAME ZONE VIP - ADMIN 3D CENTER</h1>
+      <p class="text-xs text-gray-400">Hệ thống điều khiển thuật toán & quản lý người chơi toàn diện</p>
+    </div>
+    <div class="status-badge">● SERVER ONLINE (256ms)</div>
+  </div>
+
+  <!-- STATS OVERVIEW -->
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="lbl">TỔNG DOANH THU</div>
+      <div class="val" id="totalRevenue">8,450,200,000đ</div>
+    </div>
+    <div class="stat-card">
+      <div class="lbl">TỔNG TIỀN CƯỢC PHIÊN HIỆN TẠI</div>
+      <div class="val" style="color:var(--cyan);" id="currentBetTotal">550,000,000đ</div>
+    </div>
+    <div class="stat-card">
+      <div class="lbl">QUỸ NỔ HŨ TÍCH LŨY</div>
+      <div class="val" style="color:var(--pink);" id="jackpotPool">1,024,500,000đ</div>
+    </div>
+    <div class="stat-card">
+      <div class="lbl">NGƯỜI CHƠI ONLINE</div>
+      <div class="val" style="color:var(--green);" id="onlineUsers">1,284 VIP</div>
+    </div>
+  </div>
+
+  <!-- MAIN CONTROLS -->
+  <div class="main-grid">
+    <!-- PANEL CAN THIỆP KẾT QUẢ GAME -->
+    <div class="glass-panel">
+      <h2 class="font-extrabold text-amber-300 text-sm mb-2">⚡ CAN THIỆP KẾT QUẢ TÀI XỈU 3D</h2>
+      <p class="text-xs text-gray-400 mb-3">Điều chỉnh kết quả phiên tiếp theo để cân bằng phế nhà cái:</p>
+      
+      <div class="grid grid-cols-2 gap-2">
+        <button class="control-btn btn-tai" onclick="setForceResult('TAI')">BẮT BUỘC RA TÀI (11-18)</button>
+        <button class="control-btn btn-xiu" onclick="setForceResult('XIU')">BẮT BUỘC RA XỈU (3-10)</button>
+      </div>
+      <button class="control-btn btn-nohu mt-2" onclick="setForceResult('JACKPOT')">💥 BẮT BUỘC NỔ HŨ 1B (666 / 111)</button>
+
+      <div class="mt-4 p-3 bg-black/40 rounded-lg">
+        <div class="text-xs font-bold text-gray-300">Trạng thái can thiệp phiên hiện tại:</div>
+        <div class="text-sm font-extrabold text-amber-400 mt-1" id="currentForceStatus">Đang chạy Thuật toán Ngẫu nhiên (Auto)</div>
+      </div>
+    </div>
+
+    <!-- PANEL TẠO GIFTCODE & GỬI THƯ THÔNG BÁO -->
+    <div class="glass-panel">
+      <h2 class="font-extrabold text-amber-300 text-sm mb-2">🎁 PHÁT CODE & GỬI THƯ HÒM THƯ TOÀN SERVER</h2>
+      
+      <label class="text-xs text-gray-400">Tạo Mã Giftcode Mới:</label>
+      <div class="flex gap-2">
+        <input type="text" id="newCodeInput" class="form-input mb-0" placeholder="VD: TRIANVIP100K" value="TRIANVIP100K">
+        <button class="control-btn btn-tai w-auto px-4 mt-1" onclick="createGiftcode()">TẠO CODE</button>
+      </div>
+
+      <div class="mt-3">
+        <label class="text-xs text-gray-400">Tiêu đề Thư / Thông báo:</label>
+        <input type="text" id="mailTitleInput" class="form-input mb-1" placeholder="VD: 🎁 Quà Tri ân Tân Thủ" value="🎁 Sự Kiện Đua Top Lớn">
+        <label class="text-xs text-gray-400">Nội dung & Số tiền thưởng kèm theo (VNĐ):</label>
+        <textarea id="mailContentInput" class="form-input" rows="2" placeholder="Nhập nội dung thư...">Chúc mừng game thủ nhận thưởng nóng khởi nghiệp!</textarea>
+        <input type="number" id="mailRewardAmt" class="form-input" placeholder="Số tiền thưởng (VD: 50000)" value="50000">
+        <button class="control-btn btn-nohu mt-0" onclick="sendServerMail()">GỬI THƯ & QUÀ TOÀN SERVER</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- QUẢN LÝ TÀI KHOẢN & RESET SỐ DƯ -->
+  <div class="glass-panel mt-4">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
+      <h2 class="font-extrabold text-amber-300 text-sm">💳 QUẢN LÝ TÀI KHOẢN & RESET SỐ DƯ NGƯỜI CHƠI</h2>
+      <button class="control-btn btn-danger w-auto px-3 py-1" style="margin:0; font-size:10px;" onclick="resetAllUsersBalance()">🔄 RESET TOÀN BỘ SỐ DƯ (VỀ 0Đ)</button>
+    </div>
+    <table class="data-table">
+      <thead>
+        <tr>
+          <th>TÊN TÀI KHOẢN</th>
+          <th>SỐ DƯ</th>
+          <th>STK / NGÂN HÀNG</th>
+          <th>SỐ TIỀN RÚT</th>
+          <th>TRẠNG THÁI</th>
+          <th>THAO TÁC</th>
+        </tr>
+      </thead>
+      <tbody id="adminUserTable">
+        <tr>
+          <td>VIP_Superstar</td>
+          <td>58,400,000đ</td>
+          <td>99999999 - MBBank</td>
+          <td>10,000,000đ</td>
+          <td><span class="text-amber-300 font-bold">Chờ duyệt</span></td>
+          <td>
+            <button class="bg-emerald-500 text-black px-2 py-1 rounded text-xs font-bold" onclick="approveWithdraw(this)">Duyệt Rút</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<script>
+let forcedMode = 'AUTO';
+
+function setForceResult(mode) {
+  forcedMode = mode;
+  const statusEl = document.getElementById('currentForceStatus');
+  if (mode === 'TAI') {
+    statusEl.innerText = '🔥 ĐÃ ÉP KẾT QUẢ: RA TÀI (11-18)';
+    statusEl.style.color = 'var(--pink)';
+  } else if (mode === 'XIU') {
+    statusEl.innerText = '⚡ ĐÃ ÉP KẾT QUẢ: RA XỈU (3-10)';
+    statusEl.style.color = 'var(--cyan)';
+  } else if (mode === 'JACKPOT') {
+    statusEl.innerText = '💥 ĐÃ ÉP KẾT QUẢ: NỔ HŨ 1B (666 / 111)';
+    statusEl.style.color = 'var(--gold)';
+  }
+  alert(`✅ Đã thiết lập chế độ can thiệp: ${mode}`);
+}
+
+function createGiftcode() {
+  const code = document.getElementById('newCodeInput').value.trim();
+  if(!code) return;
+  alert(`🎉 Tạo thành công Giftcode: ${code}`);
+}
+
+function sendServerMail() {
+  const title = document.getElementById('mailTitleInput').value.trim();
+  const content = document.getElementById('mailContentInput').value.trim();
+  const amt = parseInt(document.getElementById('mailRewardAmt').value) || 0;
+  
+  if(!title || !content) {
+    alert('Vui lòng nhập đầy đủ tiêu đề và nội dung thư!');
+    return;
+  }
+
+  // Lưu thông tin thư vào localStorage để client (index.html) nhận diện và hiển thị vào hòm thư
+  let serverMails = JSON.parse(localStorage.getItem('game_server_mails') || '[]');
+  serverMails.unshift({ title: title, content: content, reward: amt, time: 'Vừa xong' });
+  localStorage.setItem('game_server_mails', JSON.stringify(serverMails));
+
+  alert(`📫 Đã gửi thông báo & quà (+${amt.toLocaleString('vi-VN')}đ) vào hòm thư toàn server thành công!`);
+}
+
+function resetAllUsersBalance() {
+  if(confirm('⚠️ CẢNH BÁO: Bạn có chắc chắn muốn reset số dư của toàn bộ người chơi về 0đ không?')) {
+    let users = JSON.parse(localStorage.getItem('game_users') || '{}');
+    for(let acc in users) {
+      users[acc].balance = 0;
+    }
+    localStorage.setItem('game_users', JSON.stringify(users));
+    alert('🔄 Đã reset toàn bộ số dư tài khoản người chơi thành công!');
+  }
+}
+
+function approveWithdraw(btn) {
+  const tr = btn.closest('tr');
+  tr.cells[4].innerHTML = '<span class="text-emerald-400 font-bold">Đã Duyệt</span>';
+  btn.parentElement.innerHTML = '<span class="text-gray-400 text-xs">Hoàn thành</span>';
+  alert('✅ Đã duyệt lệnh rút tiền thành công!');
+}
+</script>
+</body>
+</html>

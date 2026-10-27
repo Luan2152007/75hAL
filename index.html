@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+<title>GAME ZONE VIP - CASINO 3D & CHAT ROOM</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+<style>
+@keyframes rainbowGlow {
+  0%   { --glow-color: #ffd76a; --border-color: #ffd76a; }
+  12.5%{ --glow-color: #8b5cff; --border-color: #8b5cff; }
+  25%  { --glow-color: #38e8ff; --border-color: #38e8ff; }
+  37.5%{ --glow-color: #ff4fd8; --border-color: #ff4fd8; }
+  50%  { --glow-color: #00e676; --border-color: #00e676; }
+  62.5%{ --glow-color: #ff9100; --border-color: #ff9100; }
+  75%  { --glow-color: #ff3d67; --border-color: #ff3d67; }
+  87.5%{ --glow-color: #29b6f6; --border-color: #29b6f6; }
+  100% { --glow-color: #ffd76a; --border-color: #ffd76a; }
+}
+
+:root {
+  --bg-gradient: radial-gradient(circle at 50% 0%, #1c0c24 0%, #0c0614 50%, #05020a 100%);
+  --panel-bg: rgba(22, 14, 35, 0.92);
+  --gold: #ffd76a;
+  --pink: #ff4fd8;
+  --cyan: #38e8ff;
+  --violet: #8b5cff;
+  --text: #f7f7ff;
+  --red: #ff3d67;
+  --green: #00e676;
+  --glow-color: #ffd76a;
+  --border-color: #ffd76a;
+}
+
+* { box-sizing: border-box; -webkit-tap-highlight-color: transparent; user-select: none; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg-gradient);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  min-height: 100vh;
+  width: 100vw;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+  animation: rainbowGlow 12s infinite linear;
+}
+
+.app-container {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 10px 12px 85px 12px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP NAV */
+.top-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border: 1px solid var(--border-color);
+  border-radius: 16px;
+  background: rgba(15, 10, 25, 0.9);
+  box-shadow: 0 0 15px var(--glow-color);
+}
+
+.brand { display: flex; align-items: center; gap: 8px; }
+.brand-logo { font-size: 26px; filter: drop-shadow(0 0 8px var(--glow-color)); }
+.brand-text h1 {
+  font-size: 15px;
+  letter-spacing: 1px;
+  background: linear-gradient(90deg, #fff, var(--glow-color), #ff9d4d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-weight: 900;
+}
+.brand-text p { color: #8c90b5; font-size: 8px; font-weight: 700; letter-spacing: 1px; }
+
+.user-profile-badge {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.avatar-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  background: linear-gradient(135deg, var(--violet), #110520);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--glow-color);
+  transition: transform 0.2s;
+}
+.avatar-btn:active { transform: scale(0.92); }
+
+.wallet-badge {
+  border: 1px solid var(--border-color);
+  background: rgba(15, 10, 25, 0.9);
+  border-radius: 20px;
+  padding: 4px 10px;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  font-weight: bold;
+  font-size: 12px;
+  color: var(--gold);
+  cursor: pointer;
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+/* MENU TABS */
+.menu-tabs {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 3px;
+  background: rgba(15, 10, 25, 0.6);
+  padding: 5px;
+  border-radius: 14px;
+  margin-top: 6px;
+  border: 1px solid var(--border-color);
+}
+.menu-tab-btn {
+  background: transparent;
+  border: 0;
+  color: #8c90b5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  font-size: 8px;
+  cursor: pointer;
+  padding: 5px 1px;
+  border-radius: 10px;
+  transition: 0.2s;
+  position: relative;
+}
+.menu-tab-btn span { font-size: 16px; }
+.menu-tab-btn.active {
+  background: linear-gradient(135deg, rgba(139,92,255,0.4), rgba(56,232,255,0.2));
+  border: 1px solid var(--border-color);
+  color: #fff;
+  box-shadow: 0 0 10px var(--glow-color);
+}
+
+.mail-badge-dot {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  width: 8px;
+  height: 8px;
+  background: var(--red);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--red);
+}
+
+.game-view { display: none; }
+.game-view.active { display: block; }
+
+/* CARD PANEL & STAGE */
+.card-panel {
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  background: var(--panel-bg);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.7), 0 0 20px var(--glow-color);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  margin-top: 10px;
+  padding: 12px;
+  position: relative;
+}
+
+.card-header-title { font-size: 14px; font-weight: 900; color: var(--glow-color); display:flex; justify-content:space-between; align-items:center; }
+.card-header-sub { font-size: 8px; color: #8c90b5; margin-top: 2px; }
+
+.stage-3d {
+  position: relative;
+  height: 170px;
+  width: 100%;
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 255, 0.2), rgba(0,0,0,0.85));
+  border-radius: 14px;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid var(--border-color);
+}
+
+canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 100%; z-index: 1; }
+
+.timer-badge-abs {
+  position: absolute;
+  top: 8px; right: 8px;
+  background: linear-gradient(135deg, #ff0055, #ff5500);
+  color: #fff;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 12px;
+  box-shadow: 0 0 10px #ff0055;
+  z-index: 10;
+}
+
+.jackpot-badge-abs {
+  position: absolute;
+  top: 8px; left: 8px;
+  background: linear-gradient(135deg, #ffd76a, #ff9100);
+  color: #111;
+  padding: 3px 8px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 10px;
+  box-shadow: 0 0 10px var(--gold);
+  z-index: 10;
+}
+
+.bowl-cover-round {
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  background: radial-gradient(circle at 35% 35%, #f25268 0%, #850c18 60%, #290005 100%);
+  border: 3px solid var(--border-color);
+  border-radius: 50%;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.9);
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
+  color: var(--gold);
+  font-size: 11px;
+  cursor: grab;
+  touch-action: none;
+  left: calc(50% - 65px);
+  top: calc(50% - 65px);
+  transition: opacity 0.3s ease;
+}
+
+.cau-so-bar {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: 5px;
+  margin-top: 8px;
+  background: rgba(0,0,0,0.5);
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+}
+.cau-item {
+  background: rgba(255,255,255,0.05);
+  padding: 4px;
+  border-radius: 6px;
+}
+.cau-item .lbl { font-size: 7px; color: #aaa; }
+.cau-item .val { font-size: 13px; font-weight: 900; color: var(--gold); }
+
+.soi-road-bar {
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px;
+  padding: 5px 6px; background: rgba(0,0,0,0.5); border-radius: 8px; margin-top: 6px;
+}
+.road-dot {
+  aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center;
+  font-size: 7px; font-weight: 900; color: #fff;
+}
+.road-dot.tai { background: radial-gradient(circle at 30% 30%, #ff73fa, #a00088); }
+.road-dot.xiu { background: radial-gradient(circle at 30% 30%, #00f0ff, #0066b3); }
+
+.bet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; position: relative; }
+.bet-option {
+  background: linear-gradient(180deg, #1b1029, #0a0512);
+  border: 2px solid rgba(255,255,255,0.1);
+  border-radius: 12px; padding: 8px; text-align: center; cursor: pointer; transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+.bet-option.active { border-color: var(--border-color); box-shadow: 0 0 15px var(--glow-color); }
+.bet-option .title { font-size: 15px; font-weight: 900; }
+.bet-info-mini { display: flex; justify-content: space-between; font-size: 8px; color: var(--gold); margin-top: 3px; background: rgba(0,0,0,0.4); padding: 2px 4px; border-radius: 4px; }
+
+/* Hiệu ứng chip bay vào bàn cược */
+.flying-chip {
+  position: absolute;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  border: 2px dashed #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 7px;
+  font-weight: 900;
+  color: #fff;
+  box-shadow: 0 0 10px #000;
+  z-index: 50;
+  pointer-events: none;
+  transition: all 0.6s cubic-bezier(0.15, 0.85, 0.35, 1.2);
+}
+
+.chips-bar {
+  display: flex; gap: 5px; justify-content: flex-start; align-items: center;
+  padding: 5px 4px; background: rgba(0,0,0,0.3); border-radius: 10px; margin-top: 6px; overflow-x: auto;
+}
+.chip {
+  width: 32px; height: 32px; border-radius: 50%; border: 2px dashed #fff;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 8px; font-weight: 900; color: #fff; cursor: pointer; flex-shrink: 0;
+}
+
+.bet-display-box { display: flex; gap: 5px; align-items: center; margin-top: 5px; }
+.bet-input-box {
+  flex: 1; background: #09050e; border: 1px solid var(--border-color); color: var(--gold);
+  border-radius: 8px; padding: 6px; text-align: center; font-weight: bold; font-size: 12px;
+}
+
+.action-controls { display: flex; gap: 6px; margin-top: 6px; }
+.btn-shake {
+  flex: 1; border: 0; border-radius: 16px; padding: 10px; font-size: 13px; font-weight: 900;
+  color: #111; background: linear-gradient(180deg, #ffe875, #f0a800);
+  box-shadow: 0 0 12px var(--glow-color); cursor: pointer; text-align: center;
+}
+.btn-sub-ctrl {
+  background: rgba(25, 15, 40, 0.8); border: 1px solid var(--border-color);
+  border-radius: 10px; color: #fff; padding: 0 10px; font-weight: bold; font-size: 9px; cursor: pointer;
+}
+
+/* KHUNG CHAT BẬT TẮT REALTIME */
+.chat-toggle-btn {
+  position: fixed;
+  right: 12px;
+  bottom: 75px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--cyan), var(--violet));
+  border: 2px solid #fff;
+  box-shadow: 0 0 15px var(--cyan);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 800;
+}
+
+.chat-box-widget {
+  position: fixed;
+  right: 12px;
+  bottom: 125px;
+  width: 280px;
+  height: 320px;
+  background: rgba(15, 8, 26, 0.95);
+  border: 2px solid var(--border-color);
+  border-radius: 16px;
+  backdrop-filter: blur(12px);
+  z-index: 800;
+  display: none;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+.chat-box-widget.show { display: flex; }
+
+.chat-header {
+  background: rgba(255,255,255,0.05);
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: bold;
+  color: var(--gold);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 8px;
+  overflow-y: auto;
+  font-size: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.chat-msg {
+  background: rgba(255,255,255,0.04);
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+.chat-msg b { color: var(--cyan); }
+
+.chat-input-area {
+  padding: 6px;
+  display: flex;
+  gap: 4px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+}
+.chat-input {
+  flex: 1;
+  background: rgba(0,0,0,0.5);
+  border: 1px solid var(--border-color);
+  color: #fff;
+  border-radius: 6px;
+  padding: 4px 8px;
+  font-size: 10px;
+  outline: none;
+}
+
+/* BOTTOM NAV */
+.bottom-nav {
+  position: fixed; left: 50%; bottom: 6px; transform: translateX(-50%);
+  width: min(500px, calc(100% - 12px)); display: grid; grid-template-columns: repeat(5, 1fr);
+  background: rgba(16, 9, 24, 0.96); border: 1px solid var(--border-color);
+  border-radius: 14px; backdrop-filter: blur(12px); z-index: 900; padding: 5px 0;
+  box-shadow: 0 0 15px var(--glow-color);
+}
+.bottom-nav button { background: none; border: 0; color: #8c90b5; font-size: 8px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.bottom-nav button.active { color: var(--gold); font-weight: bold; }
+.bottom-nav button span { font-size: 15px; }
+
+/* MODALS */
+.modal-overlay {
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
+  display: none; align-items: center; justify-content: center; z-index: 1000; padding: 15px;
+}
+.modal-overlay.show { display: flex; }
+.modal-content {
+  width: min(450px, 100%); background: rgba(20, 13, 30, 0.95);
+  border: 2px solid var(--border-color); border-radius: 18px; padding: 16px;
+  max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 25px var(--glow-color);
+}
+.modal-content h3 { color: var(--gold); margin-bottom: 8px; text-align: center; font-size: 15px; font-weight: 900; }
+.modal-close-btn { width: 100%; margin-top: 10px; background: rgba(255,255,255,0.05); color: #caa66a; border: 1px solid var(--border-color); padding: 7px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 10px; }
+
+.wallet-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-bottom: 8px; background: rgba(0,0,0,0.4); padding: 3px; border-radius: 6px; border: 1px solid var(--border-color); }
+.wallet-tab-btn { background: transparent; border: 0; color: #8c90b5; padding: 5px 2px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 8px; }
+.wallet-tab-btn.active { background: linear-gradient(135deg, var(--violet), #5b21b6); color: #fff; }
+.wallet-section { display: none; }
+.wallet-section.active { display: block; }
+.form-control { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); color: #fff; padding: 7px; border-radius: 6px; margin-top: 3px; margin-bottom: 6px; font-size: 10px; outline: none; }
+</style>
+</head>
+<body>
+
+<div class="app-container">
+  <!-- TOP NAV -->
+  <div class="top-nav">
+    <div class="brand">
+      <div class="brand-logo">👑</div>
+      <div class="brand-text">
+        <h1>GAME ZONE VIP</h1>
+        <p>NỔ HŨ 1B & TÀI XỈU 3D</p>
+      </div>
+    </div>
+    
+    <div class="user-profile-badge">
+      <div class="wallet-badge" onclick="openModal('walletModal')">
+        ⭐ <span id="userBalance">12,450,000</span>
+      </div>
+      <div class="avatar-btn" onclick="openModal('profileModal')">👤</div>
+    </div>
+  </div>
+
+  <!-- MENU TABS -->
+  <div class="menu-tabs">
+    <button class="menu-tab-btn active" onclick="switchGameView('taixiu', this)"><span>🎲</span>Tài Xỉu</button>
+    <button class="menu-tab-btn" onclick="switchGameView('baccarat', this)"><span>🃏</span>Baccarat</button>
+    <button class="menu-tab-btn" onclick="openModal('codeModal')"><span>🎁</span>Giftcode</button>
+    <button class="menu-tab-btn" onclick="openModal('rankModal')"><span>🏆</span>Đua Top</button>
+    <button class="menu-tab-btn" onclick="openModal('mailboxModal')">
+      <span>📫</span>Hòm Thư
+      <div class="mail-badge-dot" id="mailBadge"></div>
+    </button>
+    <button class="menu-tab-btn" onclick="openModal('cskhModal')"><span>🎧</span>CSKH</button>
+  </div>
+
+  <!-- VIEW 1: TÀI XỈU 3D -->
+  <div class="game-view active" id="view-taixiu">
+    <div class="card-panel">
+      <div class="card-header-title">
+        <span>🎲 XÚC XẮC TÀI XỈU 3D</span>
+        <button class="btn-sub-ctrl" style="padding:3px 6px;" onclick="openModal('historyModal')">📊 LỊCH SỬ</button>
+      </div>
+      <div class="card-header-sub">Từ 30s-13s cược | 13s-2s kéo nặn bát xem kết quả!</div>
+
+      <div class="stage-3d" id="stageContainer">
+        <div class="jackpot-badge-abs" id="jackpotDisplay">💰 HŨ: 1,000,000,000đ</div>
+        <div class="timer-badge-abs" id="timerDisplay">30s</div>
+        <canvas id="diceCanvas" class="game-canvas"></canvas>
+        <div class="bowl-cover-round" id="bowlCover" style="display: none;">
+          <div style="text-align:center; pointer-events:none;">
+            <div id="bowlCoverText" style="font-size:10px;color:var(--gold);">ÚP BÁT</div>
+            <div style="font-size:7px;color:#ddd;" id="bowlSubText">Kéo để nặn</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CẦU SỐ -->
+      <div class="cau-so-bar">
+        <div class="cau-item"><div class="lbl">CẦU 1</div><div class="val" id="cau1">Chẵn</div></div>
+        <div class="cau-item"><div class="lbl">CẦU 2</div><div class="val" id="cau2">Tài</div></div>
+        <div class="cau-item"><div class="lbl">CẦU 3</div><div class="val" id="cau3">Lớn</div></div>
+        <div class="cau-item"><div class="lbl">CẦU 4</div><div class="val" id="cau4">Xỉu</div></div>
+        <div class="cau-item"><div class="lbl">CẦU 5</div><div class="val" id="cau5">Lẻ</div></div>
+        <div class="cau-item"><div class="lbl">TỔNG</div><div class="val" style="color:var(--green);" id="dValTotal">11</div></div>
+      </div>
+
+      <div class="soi-road-bar" id="soiRoadBar"></div>
+
+      <div class="bet-grid">
+        <div class="bet-option" id="btnXiu" onclick="selectBet('XIU')">
+          <div class="title" style="color:var(--cyan);">XỈU (3-10)</div>
+          <div class="bet-info-mini"><span>Cược: <b id="totalXiuBet">240M</b></span><span>512 người</span></div>
+        </div>
+        <div class="bet-option" id="btnTai" onclick="selectBet('TAI')">
+          <div class="title" style="color:var(--pink);">TÀI (11-18)</div>
+          <div class="bet-info-mini"><span>Cược: <b id="totalTaiBet">310M</b></span><span>640 người</span></div>
+        </div>
+      </div>
+
+      <div class="chips-bar" id="chipsBarContainer">
+        <div class="chip" onclick="addBet(1000)" style="background:radial-gradient(#ab47bc,#7b1fa2)">1K</div>
+        <div class="chip" onclick="addBet(10000)" style="background:radial-gradient(#26a69a,#00695c)">10K</div>
+        <div class="chip" onclick="addBet(50000)" style="background:radial-gradient(#29b6f6,#01579b)">50K</div>
+        <div class="chip" onclick="addBet(100000)" style="background:radial-gradient(#1e88e5,#0d47a1)">100K</div>
+        <div class="chip" onclick="addBet(500000)" style="background:radial-gradient(#43a047,#1b5e20)">500K</div>
+        <div class="chip" onclick="addBet(1000000)" style="background:radial-gradient(#fb8c00,#e65100)">1M</div>
+        <div class="chip" onclick="setAllInBet()" style="background:radial-gradient(#ff3d67,#c2185b)">ALL</div>
+      </div>
+
+      <div class="bet-display-box">
+        <input type="text" id="customBetDisplay" class="bet-input-box" value="0đ" readonly>
+        <button class="btn-sub-ctrl" style="padding:6px 10px; background:var(--red);" onclick="clearBet()">Xóa</button>
+      </div>
+
+      <div class="action-controls">
+        <button class="btn-shake" onclick="placeBetOnline()">XÁC NHẬN CƯỢC TÀI XỈU</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- VIEW 2: BACCARAT 3D -->
+  <div class="game-view" id="view-baccarat">
+    <div class="card-panel">
+      <div class="card-header-title">🃏 BACCARAT 3D VIP</div>
+      <div class="card-header-sub">Mức cược chuẩn từ 50.000đ đến 1.000.000đ</div>
+      <div class="stage-3d" style="flex-direction:column; gap:6px; padding:8px;">
+        <div style="display:flex; justify-content:space-around; width:100%; font-size:10px;">
+          <div><b>PLAYER:</b> <span id="bacPlayerCards" style="color:var(--cyan);">--</span> (Điểm: <b id="bacPlayerScore">0</b>)</div>
+          <div><b>BANKER:</b> <span id="bacBankerCards" style="color:var(--pink);">--</span> (Điểm: <b id="bacBankerScore">0</b>)</div>
+        </div>
+        <div id="bacResultBanner" style="font-size:13px; font-weight:900; color:var(--gold); text-align:center;">Chờ đặt cược vòng mới...</div>
+      </div>
+      <div class="baccarat-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-top:6px;">
+        <div class="bet-option" id="btnPlayer" onclick="selectBacBet('PLAYER')"><div class="title" style="color:var(--cyan);">PLAYER</div><div class="sub" style="font-size:8px;color:var(--gold);">1 : 1</div></div>
+        <div class="bet-option" id="btnTie" onclick="selectBacBet('TIE')"><div class="title" style="color:var(--gold);">TIE</div><div class="sub" style="font-size:8px;color:var(--gold);">1 : 8</div></div>
+        <div class="bet-option" id="btnBanker" onclick="selectBacBet('BANKER')"><div class="title" style="color:var(--pink);">BANKER</div><div class="sub" style="font-size:8px;color:var(--gold);">1 : 0.95</div></div>
+      </div>
+      <div class="chips-bar" style="margin-top:8px;">
+        <div class="chip" onclick="addBacBet(50000)" style="background:radial-gradient(#29b6f6,#01579b)">50K</div>
+        <div class="chip" onclick="addBacBet(100000)" style="background:radial-gradient(#1e88e5,#0d47a1)">100K</div>
+        <div class="chip" onclick="addBacBet(500000)" style="background:radial-gradient(#43a047,#1b5e20)">500K</div>
+        <div class="chip" onclick="addBacBet(1000000)" style="background:radial-gradient(#fb8c00,#e65100)">1M</div>
+      </div>
+      <div class="bet-display-box">
+        <input type="text" id="bacBetDisplay" class="bet-input-box" value="0đ" readonly>
+        <button class="btn-sub-ctrl" style="padding:6px 10px; background:var(--red);" onclick="clearBacBet()">Xóa</button>
+      </div>
+      <div class="action-controls">
+        <button class="btn-shake" onclick="placeBaccaratBet()">CHIA BÀI & XÁC NHẬN</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- KHUNG CHAT BẬT TẮT -->
+<div class="chat-toggle-btn" onclick="toggleChatBox()">💬</div>
+<div class="chat-box-widget" id="chatWidget">
+  <div class="chat-header">
+    <span>💬 TÁN GÓC CỘNG ĐỒNG VIP</span>
+    <span style="cursor:pointer;" onclick="toggleChatBox()">✖</span>
+  </div>
+  <div class="chat-messages" id="chatMsgList">
+    <div class="chat-msg"><b>HoangGia75:</b> Phiên này khả năng cao về Tai đó anh em!</div>
+    <div class="chat-msg"><b>TyPhu88:</b> Vừa bú được quả nổ hũ sướng vãi!</div>
+  </div>
+  <div class="chat-input-area">
+    <input type="text" id="chatInputField" class="chat-input" placeholder="Nhập tin nhắn..." onkeypress="handleChatKeyPress(event)">
+    <button class="btn-sub-ctrl" style="padding:4px 8px; background:var(--gold); color:#000;" onclick="sendChatMessage()">Gửi</button>
+  </div>
+</div>
+
+<!-- BOTTOM NAV -->
+<div class="bottom-nav">
+  <button class="active" onclick="switchGameView('taixiu', this)"><span>🏠</span>Trang Chủ</button>
+  <button onclick="openModal('codeModal')"><span>🎁</span>Giftcode</button>
+  <button onclick="openModal('walletModal')"><span>💳</span>Nạp Tiền</button>
+  <button onclick="openModal('rankModal')"><span>🏆</span>Đua Top</button>
+  <button onclick="openModal('profileModal')"><span>👤</span>Cá Nhân</button>
+</div>
+
+<!-- MODAL ĐĂNG NHẬP / ĐĂNG KÝ & ĐẶT TÊN NHÂN VẬT -->
+<div class="modal-overlay show" id="authModal">
+  <div class="modal-content" style="border-color:var(--gold);">
+    <div style="font-size:32px; text-align:center; margin-bottom:4px;">👑</div>
+    <h3 id="authTitle" style="color:var(--gold);">ĐĂNG NHẬP HỆ THỐNG</h3>
+    
+    <div class="wallet-tabs" style="grid-template-columns: 1fr 1fr; margin-bottom: 10px;">
+      <button class="wallet-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')">Đăng Nhập</button>
+      <button class="wallet-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')">Đăng Ký Tài Khoản</button>
+    </div>
+
+    <div id="loginFormSection">
+      <label style="font-size:10px; color:#aaa;">Tên tài khoản:</label>
+      <input type="text" id="loginUsername" class="form-control" placeholder="Nhập tên tài khoản">
+      <label style="font-size:10px; color:#aaa;">Mật khẩu:</label>
+      <input type="password" id="loginPassword" class="form-control" placeholder="Nhập mật khẩu">
+      <button class="btn-shake" style="width:100%; padding:10px; font-size:12px; margin-top:6px;" onclick="handleLogin()">ĐĂNG NHẬP NGAY</button>
+    </div>
+
+    <div id="registerFormSection" style="display:none;">
+      <label style="font-size:10px; color:#aaa;">Tên tài khoản mới:</label>
+      <input type="text" id="regUsername" class="form-control" placeholder="Tạo tài khoản đăng nhập">
+      <label style="font-size:10px; color:#aaa;">Tên nhân vật trong game (Hiển thị):</label>
+      <input type="text" id="regNickname" class="form-control" placeholder="Nhập tên hiển thị của bạn">
+      <label style="font-size:10px; color:#aaa;">Mật khẩu:</label>
+      <input type="password" id="regPassword" class="form-control" placeholder="Tạo mật khẩu bảo mật">
+      <button class="btn-shake" style="width:100%; padding:10px; font-size:12px; margin-top:6px; background:linear-gradient(180deg,#38e8ff,#0088cc); color:#000;" onclick="handleRegister()">ĐĂNG KÝ & TẠO NHÂN VẬT</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL CẢNH BÁO TRANG GIẢ MẠO -->
+<div class="modal-overlay" id="alertModal">
+  <div class="modal-content" style="border-color:var(--red); text-align:center;">
+    <div style="font-size:36px; margin-bottom:4px;">⚠️</div>
+    <h3 style="color:var(--red);">CẢNH BÁO TRANG LỪA ĐẢO</h3>
+    <div style="background:rgba(255,61,103,0.15); border:1px solid var(--red); padding:10px; border-radius:10px; font-size:10px; color:#fff; text-align:left; line-height:1.5; margin-bottom:10px;">
+      <b>Quý khách lưu ý:</b> Hiện nay có rất nhiều trang web giả mạo thương hiệu <b>GAME ZONE VIP</b> nhằm chiếm đoạt tài khoản và tiền của người chơi.<br><br>
+      📌 Chỉ truy cập qua đường link chính thức.<br>
+      📌 Nhân viên CSKH <b>KHÔNG BAO GIỜ</b> yêu cầu cung cấp Mật khẩu hoặc Mã OTP.
+    </div>
+    <button class="btn-shake" style="width:100%; padding:9px; font-size:12px; background:linear-gradient(180deg,#ff3d67,#c2185b); color:#fff;" onclick="closeModal('alertModal')">I CHẤP NHẬN & ĐÃ HIỂU</button>
+  </div>
+</div>
+
+<!-- MODAL HÒM THƯ HỆ THỐNG -->
+<div class="modal-overlay" id="mailboxModal">
+  <div class="modal-content">
+    <h3>📫 HÒM THƯ HỆ THỐNG</h3>
+    <div style="display:flex; flex-direction:column; gap:8px; max-height:250px; overflow-y:auto;" id="mailList">
+      <div style="background:rgba(255,255,255,0.04); padding:8px; border-radius:8px; border-left:3px solid var(--gold);">
+        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:11px;">
+          <span>🎁 Quà Tặng Tân Thủ</span>
+          <span style="font-size:8px; color:#aaa;">Vừa xong</span>
+        </div>
+        <div style="font-size:9px; color:#ccc; margin-top:3px;">Chào mừng bạn đến với Game Zone VIP! Nhận ngay 100.000đ lộc khởi nghiệp.</div>
+        <button class="btn-sub-ctrl" style="margin-top:5px; background:var(--green); color:#000; padding:2px 8px;" onclick="claimMailReward(this, 100000)">NHẬN QUÀ (+100K)</button>
+      </div>
+      <div style="background:rgba(255,255,255,0.04); padding:8px; border-radius:8px; border-left:3px solid var(--cyan);">
+        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:11px;">
+          <span>📢 Thông Báo Bảo Trì Server</span>
+          <span style="font-size:8px; color:#aaa;">Hôm nay</span>
+        </div>
+        <div style="font-size:9px; color:#ccc; margin-top:3px;">Hệ thống nâng cấp cụm máy chủ 3D hoàn tất. Chúc quý khách chơi game vui vẻ!</div>
+      </div>
+    </div>
+    <button class="modal-close-btn" onclick="closeModal('mailboxModal')">ĐÓNG</button>
+  </div>
+</div>
+
+<!-- MODAL CÁ NHÂN -->
+<div class="modal-overlay" id="profileModal">
+  <div class="modal-content">
+    <h3>👤 TÀI KHOẢN CÁ NHÂN VIP</h3>
+    <div style="text-align:center; margin-bottom:12px;">
+      <div style="width:60px; height:60px; border-radius:50%; border:2px solid var(--gold); background:var(--violet); margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:28px;">👤</div>
+      <div style="font-weight:bold; font-size:14px; margin-top:4px;" id="profileUsername">VIP_PLAYER_75AL</div>
+      <div style="font-size:10px; color:var(--cyan);" id="profilePhoneStatus">Chưa liên kết SĐT</div>
+    </div>
+
+    <div style="background:rgba(0,0,0,0.4); padding:10px; border-radius:10px; margin-bottom:10px;">
+      <label style="font-size:10px; color:#aaa;">Liên kết SĐT nhận ngay +50K:</label>
+      <div style="display:flex; gap:4px; margin-top:4px;">
+        <input type="text" id="phoneInput" class="form-control" style="margin:0;" placeholder="Nhập số điện thoại">
+        <button class="btn-sub-ctrl" style="background:var(--green); color:#000; padding:0 10px;" onclick="linkPhoneNumber()">LIÊN KẾT</button>
+      </div>
+    </div>
+
+    <button class="btn-shake" style="width:100%; padding:9px; font-size:12px; margin-bottom:6px; background:linear-gradient(180deg,#ff3d67,#c2185b); color:#fff;" onclick="logoutAccount()">ĐĂNG XUẤT TÀI KHOẢN</button>
+    <button class="modal-close-btn" onclick="closeModal('profileModal')">ĐÓNG</button>
+  </div>
+</div>
+
+<!-- MODAL NHẬP CODE -->
+<div class="modal-overlay" id="codeModal">
+  <div class="modal-content">
+    <h3>🎁 NHẬP GIFTCODE NHẬN THƯỞNG</h3>
+    <input type="text" id="giftcodeInput" class="form-control" placeholder="VD: GAMEZONE2026">
+    <button class="btn-shake" style="width:100%;padding:9px;font-size:12px;" onclick="claimGiftcode()">XÁC NHẬN</button>
+    <button class="modal-close-btn" onclick="closeModal('codeModal')">ĐÓNG</button>
+  </div>
+</div>
+
+<!-- MODAL ĐUA TOP 1-10 -->
+<div class="modal-overlay" id="rankModal">
+  <div class="modal-content">
+    <h3>🏆 BẢNG VÀNG ĐUA TOP (1 - 10)</h3>
+    <div style="display:flex;flex-direction:column;gap:4px; max-height:220px; overflow-y:auto;" id="topListContainer"></div>
+    <button class="modal-close-btn" onclick="closeModal('rankModal')">ĐÓNG</button>
+  </div>
+</div>
+
+<!-- MODAL CSKH -->
+<div class="modal-overlay" id="cskhModal">
+  <div class="modal-content">
+    <h3>🎧 CHĂM SÓC KHÁCH HÀNG 24/7</h3>
+    <div style="background:rgba(0,0,0,0.4); padding:10px; border-radius:10px; text-align:center; margin-bottom:8px;">
+      <div style="font-size:12px; color:var(--gold); font-weight:bold;">Telegram CSKH:</div>
+      <div style="font-size:14px; color:var(--cyan); font-weight:900; margin-top:4px;">@GameZone_VIP75</div>
+    </div>
+    <button class="modal-close-btn" onclick="closeModal('cskhModal')">ĐÓNG</button>
+  </div>
+</div>
+
+<!-- MODAL NẠP RÚT -->
+<div class="modal-overlay" id="walletModal">
+  <div class="modal-content">
+    <h3>💳 NẠP RÚT GAME ZONE</h3>
+    <p style="text-align:center;font-size:10px;color:#aaa;margin-bottom:6px;">Ví Hiện Tại: <b style="color:var(--gold);font-size:13px;" id="modalBalance">12,450,000đ</b></p>
+    <div class="wallet-tabs">
+      <button class="wallet-tab-btn active" onclick="switchWalletTab(0)">Nạp VietQR</button>
+      <button class="wallet-tab-btn" onclick="switchWalletTab(1)">Rút Tiền</button>
+      <button class="wallet-tab-btn" onclick="switchWalletTab(2)">Tài Khoản</button>
+      <button class="wallet-tab-btn" onclick="switchWalletTab(3)">Lịch Sử</button>
+    </div>
+    <div class="wallet-section active" id="wSection0">
+      <label style="font-size:10px;color:#aaa;">Số tiền nạp (VNĐ):</label>
+      <input type="number" id="depositAmount" class="form-control" value="500000">
+      <button class="btn-shake" style="width:100%;padding:9px;font-size:11px;" onclick="generateVietQR()">TẠO MÃ VIETQR</button>
+      <div id="vietqrDisplay" style="display:none; margin-top:6px;" class="vietqr-box-3d">
+        <img id="vietqrImg" src="" alt="QR" style="width:120px;height:120px;background:#fff;border-radius:6px;padding:4px;">
+        <div style="margin-top:5px;font-size:9px;text-align:center;">
+          <div>STK: <b style="color:var(--gold);">99999975AL</b></div>
+        </div>
+        <button class="btn-shake" style="margin-top:5px;padding:5px 10px;font-size:9px;background:linear-gradient(180deg,#00e676,#00a854);color:#fff;" onclick="confirmDeposit()">ĐÃ CHUYỂN KHOẢN</button>
+      </div>
+    </div>
+    <div class="wallet-section" id="wSection1">
+      <label style="font-size:10px;color:#aaa;">Số tiền rút (VNĐ):</label>
+      <input type="number" id="withdrawAmount" class="form-control" placeholder="Nhập số tiền rút">
+      <button class="btn-shake" style="width:100%;padding:9px;font-size:11px;background:linear-gradient(180deg,#ff4fd8,#b80086);color:#fff;" onclick="doWithdraw()">RÚT TIỀN</button>
+    </div>
+    <div class="wallet-section" id="wSection2">
+      <label style="font-size:10px;color:#aaa;">Chọn Ngân Hàng Nhận:</label>
+      <select id="bankNameInput" class="form-control">
+        <option value="Vietcombank">Vietcombank (VCB)</option>
+        <option value="Techcombank">Techcombank (TCB)</option>
+        <option value="MBBank">MB Bank (MB)</option>
+        <option value="ACB">ACB Bank</option>
+        <option value="BIDV">BIDV</option>
+        <option value="Agribank">Agribank</option>
+        <option value="VietinBank">VietinBank</option>
+        <option value="VPBank">VPBank</option>
+        <option value="Sacombank">Sacombank</option>
+        <option value="TPBank">TPBank</option>
+      </select>
+      <label style="font-size:10px;color:#aaa;">Số Tài Khoản:</label>
+      <input type="text" id="bankAccInput" class="form-control" placeholder="Nhập số tài khoản">
+      <button class="btn-shake" style="width:100%;padding:7px;font-size:11px;" onclick="alert('Đã lưu thông tin ngân hàng thành công!')">LƯU THÔNG TIN</button>
+    </div>
+    <div class="wallet-section" id="wSection3">
+      <div id="txHistoryList" style="max-height:130px;overflow-y:auto;font-size:9px;"><p style="text-align:center;color:#888;">Chưa có giao dịch.</p></div>
+    </div>
+    <button class="modal-close-btn" onclick="closeModal('walletModal')">ĐÓNG</button>
+  </div>
+</div>
+
+<script>
+let currentUser = null;
+let balance = 12450000;
+let jackpotAmount = 1000000000;
+let currentBetAmount = 0;
+let selectedSide = null;
+let userPlacedBet = null;
+let timeLeft = 30;
+let diceValues = [4, 1, 6];
+let roadHistory = ['tai', 'xiu', 'tai', 'tai', 'xiu', 'xiu', 'tai', 'xiu', 'tai', 'xiu'];
+let bowlOpened = false;
+let userPhoneLinked = false;
+
+// BACCARAT STATE
+let bacBetAmount = 0;
+let bacSelectedSide = null;
+
+function formatMoney(num) { return num.toLocaleString('vi-VN'); }
+
+function updateUI() {
+  document.getElementById('userBalance').innerText = formatMoney(balance);
+  document.getElementById('modalBalance').innerText = formatMoney(balance) + 'đ';
+  document.getElementById('customBetDisplay').value = formatMoney(currentBetAmount) + 'đ';
+  document.getElementById('bacBetDisplay').value = formatMoney(bacBetAmount) + 'đ';
+  document.getElementById('jackpotDisplay').innerText = `💰 HŨ: ${formatMoney(jackpotAmount)}đ`;
+  if(currentUser) {
+    document.getElementById('profileUsername').innerText = currentUser.nickname;
+  }
+}
+
+// XỬ LÝ AUTH (ĐĂNG NHẬP / ĐĂNG KÝ)
+function switchAuthTab(type) {
+  if(type === 'login') {
+    document.getElementById('loginFormSection').style.display = 'block';
+    document.getElementById('registerFormSection').style.display = 'none';
+    document.getElementById('tabLoginBtn').classList.add('active');
+    document.getElementById('tabRegisterBtn').classList.remove('active');
+    document.getElementById('authTitle').innerText = 'ĐĂNG NHẬP HỆ THỐNG';
+  } else {
+    document.getElementById('loginFormSection').style.display = 'none';
+    document.getElementById('registerFormSection').style.display = 'block';
+    document.getElementById('tabLoginBtn').classList.remove('active');
+    document.getElementById('tabRegisterBtn').classList.add('active');
+    document.getElementById('authTitle').innerText = 'ĐĂNG KÝ & ĐẶT TÊN NHÂN VẬT';
+  }
+}
+
+function handleRegister() {
+  const username = document.getElementById('regUsername').value.trim();
+  const nickname = document.getElementById('regNickname').value.trim();
+  const password = document.getElementById('regPassword').value.trim();
+
+  if(!username || !nickname || !password) {
+    alert('Vui lòng điền đầy đủ thông tin đăng ký!');
+    return;
+  }
+
+  let users = JSON.parse(localStorage.getItem('game_users') || '{}');
+  if(users[username]) {
+    alert('Tên tài khoản này đã tồn tại, vui lòng chọn tên khác!');
+    return;
+  }
+
+  users[username] = { password: password, nickname: nickname, balance: 500000 };
+  localStorage.setItem('game_users', JSON.stringify(users));
+
+  alert('🎉 Đăng ký tài khoản và tạo nhân vật thành công! Vui lòng đăng nhập.');
+  switchAuthTab('login');
+}
+
+function handleLogin() {
+  const username = document.getElementById('loginUsername').value.trim();
+  const password = document.getElementById('loginPassword').value.trim();
+
+  let users = JSON.parse(localStorage.getItem('game_users') || '{}');
+  if(!users[username] || users[username].password !== password) {
+    alert('Sai tên tài khoản hoặc mật khẩu!');
+    return;
+  }
+
+  currentUser = { username: username, nickname: users[username].nickname };
+  balance = users[username].balance;
+  
+  localStorage.setItem('game_current_user', JSON.stringify(currentUser));
+  
+  closeModal('authModal');
+  openModal('alertModal');
+  updateUI();
+}
+
+function logoutAccount() {
+  localStorage.removeItem('game_current_user');
+  currentUser = null;
+  location.reload();
+}
+
+function switchGameView(viewName, btn) {
+  document.querySelectorAll('.game-view').forEach(v => v.classList.remove('active'));
+  document.querySelectorAll('.menu-tabs button').forEach(b => b.classList.remove('active'));
+  if(viewName === 'taixiu') document.getElementById('view-taixiu').classList.add('active');
+  if(viewName === 'baccarat') document.getElementById('view-baccarat').classList.add('active');
+  btn.classList.add('active');
+}
+
+// HIỆU ỨNG CHIP BAY VÀO BÀN CƯỢC
+function animateFlyingChip(targetElementId) {
+  const targetEl = document.getElementById(targetElementId);
+  const chipsBar = document.getElementById('chipsBarContainer');
+  if(!targetEl || !chipsBar) return;
+
+  const targetRect = targetEl.getBoundingClientRect();
+  const barRect = chipsBar.getBoundingClientRect();
+
+  const chip = document.createElement('div');
+  chip.className = 'flying-chip';
+  chip.innerText = currentBetAmount >= 1000000 ? (currentBetAmount/1000000)+'M' : (currentBetAmount >= 1000 ? (currentBetAmount/1000)+'K' : currentBetAmount);
+  chip.style.background = 'radial-gradient(#fb8c00, #e65100)';
+  
+  // Vị trí xuất phát (từ thanh chip)
+  chip.style.left = (barRect.left + barRect.width / 2 - 12) + 'px';
+  chip.style.top = (barRect.top + 10) + 'px';
+  document.body.appendChild(chip);
+
+  // Bay đến vị trí bàn cược
+  setTimeout(() => {
+    chip.style.left = (targetRect.left + targetRect.width / 2 - 12) + 'px';
+    chip.style.top = (targetRect.top + targetRect.height / 2 - 12) + 'px';
+    chip.style.transform = 'scale(1.2) rotate(360deg)';
+    chip.style.opacity = '0.9';
+  }, 20);
+
+  // Xóa chip sau khi bay xong
+  setTimeout(() => {
+    chip.remove();
+  }, 650);
+}
+
+// CÁ NHÂN & SĐT & HÒM THƯ
+function linkPhoneNumber() {
+  const phone = document.getElementById('phoneInput').value.trim();
+  if (phone.length < 9) { alert('Vui lòng nhập SĐT hợp lệ!'); return; }
+  userPhoneLinked = true;
+  balance += 50000;
+  document.getElementById('profilePhoneStatus').innerText = `Đã liên kết: ${phone}`;
+  document.getElementById('profilePhoneStatus').style.color = 'var(--green)';
+  updateUI();
+  alert('🎉 Liên kết SĐT thành công! Bạn nhận được +50.000đ!');
+}
+
+function claimMailReward(btn, amt) {
+  balance += amt;
+  updateUI();
+  btn.disabled = true;
+  btn.innerText = 'ĐÃ NHẬN';
+  btn.style.background = '#555';
+  document.getElementById('mailBadge').style.display = 'none';
+}
+
+// CHAT BOX REALTIME
+function toggleChatBox() {
+  document.getElementById('chatWidget').classList.toggle('show');
+}
+
+function sendChatMessage() {
+  const input = document.getElementById('chatInputField');
+  const txt = input.value.trim();
+  if (!txt) return;
+  const list = document.getElementById('chatMsgList');
+  const div = document.createElement('div');
+  div.className = 'chat-msg';
+  div.innerHTML = `<b>${currentUser ? currentUser.nickname : 'Bạn'}:</b> ${txt}`;
+  list.appendChild(div);
+  list.scrollTop = list.scrollHeight;
+  input.value = '';
+}
+
+function handleChatKeyPress(e) {
+  if (e.key === 'Enter') sendChatMessage();
+}
+
+// TÀI XỈU LOGIC
+function selectBet(side) {
+  if (timeLeft <= 13) return;
+  selectedSide = side;
+  document.getElementById('btnXiu').classList.remove('active');
+  document.getElementById('btnTai').classList.remove('active');
+  if (side === 'XIU') document.getElementById('btnXiu').classList.add('active');
+  if (side === 'TAI') document.getElementById('btnTai').classList.add('active');
+}
+
+function addBet(amount) {
+  if (timeLeft <= 13) return;
+  currentBetAmount += amount;
+  if (currentBetAmount > balance) currentBetAmount = balance;
+  updateUI();
+}
+
+function setAllInBet() {
+  if (timeLeft <= 13) return;
+  currentBetAmount = balance;
+  updateUI();
+}
+
+function clearBet() {
+  currentBetAmount = 0;
+  selectedSide = null;
+  document.getElementById('btnXiu').classList.remove('active');
+  document.getElementById('btnTai').classList.remove('active');
+  updateUI();
+}
+
+function placeBetOnline() {
+  if (timeLeft <= 13) return;
+  if (!selectedSide) return;
+  if (currentBetAmount <= 0) return;
+  if (currentBetAmount > balance) return;
+  
+  balance -= currentBetAmount;
+  let jackpotContrib = Math.floor(currentBetAmount * 0.05);
+  jackpotAmount += jackpotContrib;
+
+  userPlacedBet = { side: selectedSide, amount: currentBetAmount };
+  
+  // Chạy hiệu ứng chip bay thay vì hiện bảng thông báo alert
+  animateFlyingChip(selectedSide === 'TAI' ? 'btnTai' : 'btnXiu');
+
+  updateUI();
+  clearBet();
+}
+
+// BACCARAT LOGIC
+function selectBacBet(side) {
+  bacSelectedSide = side;
+  ['Player', 'Tie', 'Banker'].forEach(s => document.getElementById('btn' + s).classList.remove('active'));
+  document.getElementById('btn' + side.charAt(0) + side.slice(1).toLowerCase()).classList.add('active');
+}
+
+function addBacBet(amount) {
+  bacBetAmount += amount;
+  if (bacBetAmount > 1000000) bacBetAmount = 1000000;
+  if (bacBetAmount > balance) bacBetAmount = balance;
+  updateUI();
+}
+
+function clearBacBet() { bacBetAmount = 0; bacSelectedSide = null; ['Player', 'Tie', 'Banker'].forEach(s => document.getElementById('btn' + s).classList.remove('active')); updateUI(); }
+
+function placeBaccaratBet() {
+  if (!bacSelectedSide) return;
+  if (bacBetAmount < 50000) return;
+  if (bacBetAmount > balance) return;
+  
+  balance -= bacBetAmount;
+  updateUI();
+
+  animateFlyingChip(bacSelectedSide === 'PLAYER' ? 'btnPlayer' : (bacSelectedSide === 'TIE' ? 'btnTie' : 'btnBanker'));
+
+  const pScore = Math.floor(Math.random() * 10);
+  const bScore = Math.floor(Math.random() * 10);
+  document.getElementById('bacPlayerCards').innerText = `J, ${Math.floor(Math.random()*9)+1}`;
+  document.getElementById('bacBankerCards').innerText = `Q, ${Math.floor(Math.random()*9)+1}`;
+  document.getElementById('bacPlayerScore').innerText = pScore;
+  document.getElementById('bacBankerScore').innerText = bScore;
+
+  let outcome = pScore > bScore ? 'PLAYER' : (bScore > pScore ? 'BANKER' : 'TIE');
+  let banner = document.getElementById('bacResultBanner');
+  banner.innerText = `Kết quả: ${outcome} (Player ${pScore} - ${bScore} Banker)`;
+
+  if (bacSelectedSide === outcome) {
+    let win = bacBetAmount * (outcome === 'TIE' ? 8 : (outcome === 'BANKER' ? 1.95 : 2));
+    balance += win;
+    if (typeof confetti === 'function') confetti({ particleCount: 60, spread: 60, origin: { y: 0.6 } });
+  }
+  clearBacBet();
+  updateUI();
+}
+
+// TIMER 30S CHUẨN XÁC
+function startTimer() {
+  setInterval(() => {
+    timeLeft--;
+    if (timeLeft < 0) timeLeft = 30;
+    document.getElementById('timerDisplay').innerText = timeLeft + 's';
+    const bowl = document.getElementById('bowlCover');
+    
+    if (timeLeft > 13) {
+      if (!bowlOpened) bowl.style.display = 'flex';
+      document.getElementById('bowlCoverText').innerText = `Úp bát (${timeLeft}s)`;
+    } else if (timeLeft <= 13 && timeLeft > 2) {
+      document.getElementById('bowlCoverText').innerText = `Đang nặn (${timeLeft}s)`;
+    } else if (timeLeft <= 2) {
+      resolveRound();
+    }
+  }, 1000);
+}
+
+function resolveRound() {
+  if (timeLeft === 2) {
+    const isJackpot = Math.random() < 0.08; 
+    if (isJackpot) {
+      diceValues = Math.random() < 0.5 ? [6, 6, 6] : [1, 1, 1];
+    } else {
+      diceValues = [Math.floor(Math.random()*6)+1, Math.floor(Math.random()*6)+1, Math.floor(Math.random()*6)+1];
+    }
+
+    const total = diceValues[0] + diceValues[1] + diceValues[2];
+    const outcome = total >= 11 ? 'TAI' : 'XIU';
+    
+    document.getElementById('dValTotal').innerText = total;
+    document.getElementById('cau1').innerText = total % 2 === 0 ? 'Chẵn' : 'Lẻ';
+    document.getElementById('cau2').innerText = outcome;
+    document.getElementById('cau3').innerText = total > 13 ? 'Lớn' : 'Nhỏ';
+    document.getElementById('cau4').innerText = total <= 10 ? 'Xỉu' : 'Tài';
+    document.getElementById('cau5').innerText = diceValues[0] === diceValues[1] ? 'Đôi' : 'Đơn';
+    
+    roadHistory.push(outcome === 'TAI' ? 'tai' : 'xiu');
+    renderRoad();
+    renderDiceScene();
+
+    if ((diceValues[0] === 6 && diceValues[1] === 6 && diceValues[2] === 6) || (diceValues[0] === 1 && diceValues[1] === 1 && diceValues[1] === 1)) {
+      let sharedJackpot = Math.floor(jackpotAmount / 5);
+      balance += sharedJackpot;
+      jackpotAmount = 1000000000;
+      if (typeof confetti === 'function') {
+        confetti({ particleCount: 300, spread: 150, origin: { y: 0.5 } });
+      }
+    } else if (userPlacedBet) {
+      if (userPlacedBet.side === outcome) {
+        const win = userPlacedBet.amount * 2;
+        balance += win;
+        if (typeof confetti === 'function') confetti({ particleCount: 70, spread: 60, origin: { y: 0.6 } });
+      }
+      userPlacedBet = null;
+    }
+    updateUI();
+  }
+}
+
+// DRAG BÁT
+function initBowlDrag() {
+  const bowl = document.getElementById('bowlCover');
+  const stage = document.getElementById('stageContainer');
+  let isDragging = false, startX, startY, initL, initT;
+
+  function onStart(e) {
+    isDragging = true;
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+    startX = cx; startY = cy;
+    const rect = bowl.getBoundingClientRect();
+    const sRect = stage.getBoundingClientRect();
+    initL = rect.left - sRect.left;
+    initT = rect.top - sRect.top;
+  }
+
+  function onMove(e) {
+    if (!isDragging) return;
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+    const dx = cx - startX, dy = cy - startY;
+    bowl.style.left = (initL + dx) + 'px';
+    bowl.style.top = (initT + dy) + 'px';
+    if (Math.hypot(dx, dy) > 70 && !bowlOpened) {
+      bowlOpened = true;
+      bowl.style.opacity = '0';
+      setTimeout(() => bowl.style.display = 'none', 300);
+      if (typeof confetti === 'function') confetti({ particleCount: 40, spread: 50 });
+    }
+  }
+
+  function onEnd() { isDragging = false; }
+
+  bowl.addEventListener('mousedown', onStart);
+  window.addEventListener('mousemove', onMove);
+  window.addEventListener('mouseup', onEnd);
+  bowl.addEventListener('touchstart', onStart, {passive:true});
+  window.addEventListener('touchmove', onMove, {passive:true});
+  window.addEventListener('touchend', onEnd);
+}
+
+function renderRoad() {
+  const bar = document.getElementById('soiRoadBar');
+  if (!bar) return;
+  bar.innerHTML = '';
+  roadHistory.slice(-12).forEach(r => {
+    const dot = document.createElement('div');
+    dot.className = `road-dot ${r}`;
+    dot.innerText = r === 'tai' ? 'T' : 'X';
+    bar.appendChild(dot);
+  });
+}
+
+function renderDiceScene() {
+  const canvas = document.getElementById('diceCanvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  canvas.width = canvas.parentElement.clientWidth;
+  canvas.height = canvas.parentElement.clientHeight;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const cx = canvas.width / 2, cy = canvas.height / 2;
+  drawDie3D(ctx, cx - 45, cy + 5, diceValues[0]);
+  drawDie3D(ctx, cx, cy - 15, diceValues[1]);
+  drawDie3D(ctx, cx + 45, cy + 5, diceValues[2]);
+}
+
+function drawDie3D(ctx, x, y, val) {
+  ctx.save();
+  ctx.translate(x, y);
+  ctx.fillStyle = '#fff'; ctx.strokeStyle = '#ffd76a'; ctx.lineWidth = 2;
+  ctx.beginPath();
+  if (typeof ctx.roundRect === 'function') ctx.roundRect(-18, -18, 36, 36, 6); else ctx.rect(-18, -18, 36, 36);
+  ctx.fill(); ctx.stroke();
+  ctx.fillStyle = val === 1 ? '#ff3d67' : '#111';
+  const pips = {
+    1: [[0,0]], 2: [[-8,-8],[8,8]], 3: [[-8,-8],[0,0],[8,8]],
+    4: [[-8,-8],[8,-8],[-8,8],[8,8]], 5: [[-8,-8],[8,-8],[0,0],[-8,8],[8,8]], 6: [[-8,-8],[8,-8],[-8,0],[8,0],[-8,8],[8,8]]
+  };
+  (pips[val] || pips[1]).forEach(p => { ctx.beginPath(); ctx.arc(p[0], p[1], 2.5, 0, Math.PI*2); ctx.fill(); });
+  ctx.restore();
+}
+
+function initTopList() {
+  const container = document.getElementById('topListContainer');
+  if(!container) return;
+  const names = ['VIP_Superstar', 'HoangGia75', 'Thần_Bài_3D', 'CaoThuTaiXiu', 'TyPhuBaMien', 'VuaNoHu', 'GiaCatDu', 'DaiGia88', 'BacBaPhi', 'HoangTuLong'];
+  let html = '';
+  for(let i=0; i<10; i++) {
+    let score = (58400000 - i * 4500000).toLocaleString('vi-VN');
+    let color = i === 0 ? 'var(--gold)' : (i === 1 ? 'var(--cyan)' : (i === 2 ? 'var(--pink)' : '#fff'));
+    let medal = i === 0 ? '🥇' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : `#${i+1}`));
+    html += `
+      <div style="background:rgba(255,255,255,0.03); padding:6px 8px; border-radius:6px; display:flex; justify-content:space-between; align-items:center; font-size:10px;">
+        <div><b>${medal} ${names[i]}</b></div>
+        <div style="color:${color}; font-weight:bold;">${score}đ</div>
+      </div>
+    `;
+  }
+  container.innerHTML = html;
+}
+
+function claimGiftcode() {
+  const code = document.getElementById('giftcodeInput').value.trim();
+  if (code === 'GAMEZONE2026' || code === '75AL') {
+    balance += 100000;
+    updateUI();
+    closeModal('codeModal');
+  }
+}
+
+function openModal(id) { document.getElementById(id).classList.add('show'); }
+function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+function switchWalletTab(idx) {
+  document.querySelectorAll('.wallet-tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
+  document.querySelectorAll('.wallet-section').forEach((s, i) => s.classList.toggle('active', i === idx));
+}
+
+function generateVietQR() {
+  const amt = document.getElementById('depositAmount').value;
+  if (!amt || amt <= 0) return;
+  document.getElementById('vietqrImg').src = `https://api.vietqr.io/image/970422-99999975AL-compact2.jpg?amount=${amt}&addInfo=GAMEZONE%20${amt}&accountName=NGUYEN%20VAN%20VIP`;
+  document.getElementById('vietqrDisplay').style.display = 'flex';
+}
+
+function confirmDeposit() {
+  const amt = parseInt(document.getElementById('depositAmount').value) || 0;
+  balance += amt;
+  updateUI();
+  closeModal('walletModal');
+}
+
+function doWithdraw() {
+  const amt = parseInt(document.getElementById('withdrawAmount').value) || 0;
+  if (amt <= 0 || amt > balance) return;
+  balance -= amt;
+  updateUI();
+  closeModal('walletModal');
+}
+
+window.onload = function() {
+  const savedUser = localStorage.getItem('game_current_user');
+  if(savedUser) {
+    currentUser = JSON.parse(savedUser);
+    closeModal('authModal');
+  } else {
+    openModal('authModal');
+  }
+
+  updateUI();
+  renderRoad();
+  renderDiceScene();
+  initBowlDrag();
+  initTopList();
+  startTimer();
+};
+</script>
+</body>
+</html>
