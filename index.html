@@ -450,6 +450,25 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 .wallet-tab-btn.active { background: linear-gradient(135deg, var(--violet), #5b21b6); color: #fff; }
 .wallet-section { display: none; }
 .wallet-section.active { display: block; }
+
+.sub-tabs { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-bottom: 10px; }
+.sub-tab-btn { background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); color: #aaa; padding: 6px; border-radius: 6px; font-size: 10px; font-weight: bold; cursor: pointer; }
+.sub-tab-btn.active { background: var(--violet); color: #fff; border-color: var(--cyan); }
+
+.tx-item {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 8px;
+  padding: 8px 10px;
+  margin-bottom: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tx-status-pending { color: var(--gold); font-weight: bold; }
+.tx-status-success { color: var(--green); font-weight: bold; }
+.tx-status-rejected { color: var(--red); font-weight: bold; }
+
 .form-control { width: 100%; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); color: #fff; padding: 9px; border-radius: 8px; margin-top: 4px; margin-bottom: 8px; font-size: 11px; outline: none; }
 </style>
 </head>
@@ -639,7 +658,6 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
       <label style="font-size:11px; color:#aaa;">Mật khẩu:</label>
       <input type="password" id="regPassword" class="form-control" placeholder="Tạo mật khẩu bảo mật">
       
-      <!-- Thẻ hiển thị thông báo Đăng ký chữ màu đỏ -->
       <div id="regMessage" style="font-size:11px; margin-top:4px; font-weight:bold; color:var(--red);"></div>
 
       <button class="btn-shake" style="width:100%; padding:11px; font-size:13px; margin-top:8px; background:linear-gradient(180deg,#38e8ff,#0088cc); color:#000;" onclick="handleRegister()">ĐĂNG KÝ & TẠO NHÂN VẬT</button>
@@ -743,7 +761,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 <!-- MODAL NẠP RÚT -->
 <div class="modal-overlay" id="walletModal">
   <div class="modal-content">
-    <h3>💳 NẠP RÚT GAME ZONE</h3>
+    <h3>💳 NẠP RÚT GAME ZONE VIP</h3>
     <p style="text-align:center;font-size:11px;color:#aaa;margin-bottom:8px;">Ví Hiện Tại: <b style="color:var(--gold);font-size:14px;" id="modalBalance">12,450,000đ</b></p>
     <div class="wallet-tabs">
       <button class="wallet-tab-btn active" onclick="switchWalletTab(0)">Nạp VietQR</button>
@@ -760,13 +778,13 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
         <div style="margin-top:6px;font-size:10px;text-align:center;">
           <div>STK: <b style="color:var(--gold);">99999975AL</b></div>
         </div>
-        <button class="btn-shake" style="margin-top:6px;padding:6px 12px;font-size:10px;background:linear-gradient(180deg,#00e676,#00a854);color:#fff;" onclick="confirmDeposit()">ĐÃ CHUYỂN KHOẢN</button>
+        <button class="btn-shake" style="margin-top:6px;padding:6px 12px;font-size:10px;background:linear-gradient(180deg,#00e676,#00a854);color:#fff;" onclick="confirmDeposit()">ĐÃ CHUYỂN KHOẢN (GỬI DUYỆT)</button>
       </div>
     </div>
     <div class="wallet-section" id="wSection1">
       <label style="font-size:11px;color:#aaa;">Số tiền rút (VNĐ):</label>
       <input type="number" id="withdrawAmount" class="form-control" placeholder="Nhập số tiền rút">
-      <button class="btn-shake" style="width:100%;padding:10px;font-size:12px;background:linear-gradient(180deg,#ff4fd8,#b80086);color:#fff;" onclick="doWithdraw()">RÚT TIỀN</button>
+      <button class="btn-shake" style="width:100%;padding:10px;font-size:12px;background:linear-gradient(180deg,#ff4fd8,#b80086);color:#fff;" onclick="doWithdraw()">RÚT TIỀN (GỬI DUYỆT)</button>
     </div>
     <div class="wallet-section" id="wSection2">
       <label style="font-size:11px;color:#aaa;">Chọn Ngân Hàng Nhận:</label>
@@ -787,7 +805,13 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
       <button class="btn-shake" style="width:100%;padding:8px;font-size:12px;" onclick="alert('Đã lưu thông tin ngân hàng thành công!')">LƯU THÔNG TIN</button>
     </div>
     <div class="wallet-section" id="wSection3">
-      <div id="txHistoryList" style="max-height:140px;overflow-y:auto;font-size:10px;"><p style="text-align:center;color:#888;">Chưa có giao dịch.</p></div>
+      <!-- BẢNG LỊCH SỬ NẠP RÚT VIP RIÊNG BIỆT -->
+      <div class="sub-tabs">
+        <button class="sub-tab-btn active" id="btnSubDeposit" onclick="switchTxSubTab('deposit')">📥 LỊCH SỬ NẠP</button>
+        <button class="sub-tab-btn" id="btnSubWithdraw" onclick="switchTxSubTab('withdraw')">📤 LỊCH SỬ RÚT</button>
+      </div>
+      <div id="depositTxList" style="max-height:160px;overflow-y:auto;font-size:11px;"></div>
+      <div id="withdrawTxList" style="max-height:160px;overflow-y:auto;font-size:11px;display:none;"></div>
     </div>
     <button class="modal-close-btn" onclick="closeModal('walletModal')">ĐÓNG</button>
   </div>
@@ -806,6 +830,9 @@ let diceValues = [4, 1, 6];
 let savedRoad = localStorage.getItem('game_road_history');
 let roadHistory = savedRoad ? JSON.parse(savedRoad) : ['tai', 'xiu', 'tai', 'tai', 'xiu', 'xiu', 'tai', 'xiu', 'tai', 'xiu'];
 
+let depositHistory = JSON.parse(localStorage.getItem('game_deposit_history')) || [];
+let withdrawHistory = JSON.parse(localStorage.getItem('game_withdraw_history')) || [];
+
 let bowlOpened = false;
 let userPhoneLinked = false;
 
@@ -818,6 +845,8 @@ function saveGameState() {
   localStorage.setItem('game_balance', balance);
   localStorage.setItem('game_jackpot', jackpotAmount);
   localStorage.setItem('game_road_history', JSON.stringify(roadHistory));
+  localStorage.setItem('game_deposit_history', JSON.stringify(depositHistory));
+  localStorage.setItem('game_withdraw_history', JSON.stringify(withdrawHistory));
 }
 
 function updateUI() {
@@ -829,6 +858,7 @@ function updateUI() {
   if(currentUser) {
     document.getElementById('profileUsername').innerText = currentUser.nickname;
   }
+  renderTxHistory();
   saveGameState(); 
 }
 
@@ -1280,9 +1310,58 @@ function claimGiftcode() {
 
 function openModal(id) { document.getElementById(id).classList.add('show'); }
 function closeModal(id) { document.getElementById(id).classList.remove('show'); }
+
 function switchWalletTab(idx) {
   document.querySelectorAll('.wallet-tab-btn').forEach((b, i) => b.classList.toggle('active', i === idx));
   document.querySelectorAll('.wallet-section').forEach((s, i) => s.classList.toggle('active', i === idx));
+}
+
+function switchTxSubTab(type) {
+  if (type === 'deposit') {
+    document.getElementById('btnSubDeposit').classList.add('active');
+    document.getElementById('btnSubWithdraw').classList.remove('active');
+    document.getElementById('depositTxList').style.display = 'block';
+    document.getElementById('withdrawTxList').style.display = 'none';
+  } else {
+    document.getElementById('btnSubDeposit').classList.remove('active');
+    document.getElementById('btnSubWithdraw').classList.add('active');
+    document.getElementById('depositTxList').style.display = 'none';
+    document.getElementById('withdrawTxList').style.display = 'block';
+  }
+}
+
+function renderTxHistory() {
+  const dList = document.getElementById('depositTxList');
+  const wList = document.getElementById('withdrawTxList');
+  if (!dList || !wList) return;
+
+  if (depositHistory.length === 0) {
+    dList.innerHTML = '<p style="text-align:center;color:#888;padding:10px;">Chưa có lịch sử nạp tiền.</p>';
+  } else {
+    dList.innerHTML = depositHistory.map(item => `
+      <div class="tx-item">
+        <div>
+          <div><b>Nạp VietQR:</b> <span style="color:var(--green);">+${formatMoney(item.amount)}đ</span></div>
+          <div style="font-size:9px;color:#aaa;">${item.time}</div>
+        </div>
+        <div class="tx-status-pending">${item.status}</div>
+      </div>
+    `).join('');
+  }
+
+  if (withdrawHistory.length === 0) {
+    wList.innerHTML = '<p style="text-align:center;color:#888;padding:10px;">Chưa có lịch sử rút tiền.</p>';
+  } else {
+    wList.innerHTML = withdrawHistory.map(item => `
+      <div class="tx-item">
+        <div>
+          <div><b>Rút Ngân Hàng:</b> <span style="color:var(--red);">${formatMoney(item.amount)}đ</span></div>
+          <div style="font-size:9px;color:#aaa;">${item.time}</div>
+        </div>
+        <div class="tx-status-pending">${item.status}</div>
+      </div>
+    `).join('');
+  }
 }
 
 function generateVietQR() {
@@ -1302,22 +1381,51 @@ function generateVietQR() {
 
 function confirmDeposit() {
   const amt = parseInt(document.getElementById('depositAmount').value) || 0;
-  balance += amt;
+  if (amt <= 0) {
+    alert('Số tiền nạp không hợp lệ!');
+    return;
+  }
+
+  const now = new Date();
+  const timeStr = `${now.getHours()}:${now.getMinutes()} ${now.getDate()}/${now.getMonth()+1}`;
+  
+  depositHistory.unshift({
+    amount: amt,
+    time: timeStr,
+    status: '⏳ Chờ Admin duyệt'
+  });
+
   updateUI();
   closeModal('walletModal');
-  alert('✨ Nạp tiền thành công vào tài khoản!');
+  alert('✨ Đã gửi yêu cầu nạp tiền! Vui lòng chờ Admin duyệt giao dịch.');
 }
 
 function doWithdraw() {
   const amt = parseInt(document.getElementById('withdrawAmount').value) || 0;
-  if (amt <= 0 || amt > balance) {
-    alert('Số tiền rút không hợp lệ hoặc vượt quá số dư!');
+  if (amt <= 0) {
+    alert('Vui lòng nhập số tiền hợp lệ!');
     return;
   }
+  if (amt > balance) {
+    alert('Số dư tài khoản không đủ để thực hiện lệnh rút!');
+    return;
+  }
+
+  // TRỪ TIỀN TRỰC TIẾP
   balance -= amt;
+
+  const now = new Date();
+  const timeStr = `${now.getHours()}:${now.getMinutes()} ${now.getDate()}/${now.getMonth()+1}`;
+
+  withdrawHistory.unshift({
+    amount: amt,
+    time: timeStr,
+    status: '⏳ Chờ Admin duyệt'
+  });
+
   updateUI();
   closeModal('walletModal');
-  alert('📩 Lệnh rút tiền đã được gửi lên hệ thống!');
+  alert('📩 Lệnh rút tiền đã được tạo thành công! Điểm của bạn đã được trừ và gửi lên Admin duyệt.');
 }
 
 window.onload = function() {
