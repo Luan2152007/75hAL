@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>GAME THỦ VIỆT- CASINO 3D & CHAT ROOM</title>
+<title>GAME ZONE VIP - CASINO 3D & CHAT ROOM</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <style>
@@ -795,7 +795,6 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 
 <script>
 let currentUser = null;
-// Khôi phục dữ liệu từ localStorage để không bị mất khi tải lại trang
 let balance = parseInt(localStorage.getItem('game_balance')) || 12450000;
 let jackpotAmount = parseInt(localStorage.getItem('game_jackpot')) || 1000000000;
 let currentBetAmount = 0;
@@ -810,13 +809,11 @@ let roadHistory = savedRoad ? JSON.parse(savedRoad) : ['tai', 'xiu', 'tai', 'tai
 let bowlOpened = false;
 let userPhoneLinked = false;
 
-// BACCARAT STATE
 let bacBetAmount = 0;
 let bacSelectedSide = null;
 
 function formatMoney(num) { return num.toLocaleString('vi-VN'); }
 
-// Lưu trữ trạng thái game vào localStorage
 function saveGameState() {
   localStorage.setItem('game_balance', balance);
   localStorage.setItem('game_jackpot', jackpotAmount);
@@ -835,7 +832,6 @@ function updateUI() {
   saveGameState(); 
 }
 
-// XỬ LÝ AUTH (ĐĂNG NHẬP / ĐĂNG KÝ)
 function switchAuthTab(type) {
   if(type === 'login') {
     document.getElementById('loginFormSection').style.display = 'block';
@@ -917,7 +913,6 @@ function switchGameView(viewName, btn) {
   btn.classList.add('active');
 }
 
-// HIỆU ỨNG CHIP BAY VÀO BÀN CƯỢC
 function animateFlyingChip(targetElementId) {
   const targetEl = document.getElementById(targetElementId);
   const chipsBar = document.getElementById('chipsBarContainer');
@@ -947,7 +942,6 @@ function animateFlyingChip(targetElementId) {
   }, 650);
 }
 
-// CÁ NHÂN & SĐT & HÒM THƯ (Đã đồng bộ trạng thái lưu localStorage)
 function linkPhoneNumber() {
   const phone = document.getElementById('phoneInput').value.trim();
   if (phone.length < 9) { alert('Vui lòng nhập SĐT hợp lệ!'); return; }
@@ -987,7 +981,6 @@ function checkMailboxState() {
   }
 }
 
-// CHAT BOX REALTIME
 function toggleChatBox() {
   document.getElementById('chatWidget').classList.toggle('show');
 }
@@ -1009,7 +1002,6 @@ function handleChatKeyPress(e) {
   if (e.key === 'Enter') sendChatMessage();
 }
 
-// TÀI XỈU LOGIC
 function selectBet(side) {
   if (timeLeft <= 13) return;
   selectedSide = side;
@@ -1058,7 +1050,6 @@ function placeBetOnline() {
   clearBet();
 }
 
-// BACCARAT LOGIC
 function selectBacBet(side) {
   bacSelectedSide = side;
   ['Player', 'Tie', 'Banker'].forEach(s => document.getElementById('btn' + s).classList.remove('active'));
@@ -1104,7 +1095,6 @@ function placeBaccaratBet() {
   updateUI();
 }
 
-// TIMER 30S CHUẨN XÁC
 function startTimer() {
   setInterval(() => {
     timeLeft--;
@@ -1125,11 +1115,21 @@ function startTimer() {
 
 function resolveRound() {
   if (timeLeft === 2) {
-    const isJackpot = Math.random() < 0.08; 
-    if (isJackpot) {
-      diceValues = Math.random() < 0.5 ? [6, 6, 6] : [1, 1, 1];
+    let forcedMode = localStorage.getItem('admin_forced_mode');
+    
+    if (forcedMode === 'TAI') {
+      diceValues = [5, 4, 3]; // Tổng 12 -> TÀI
+    } else if (forcedMode === 'XIU') {
+      diceValues = [2, 3, 2]; // Tổng 7 -> XỈU
+    } else if (forcedMode === 'JACKPOT') {
+      diceValues = [6, 6, 6]; // Nổ hũ
     } else {
-      diceValues = [Math.floor(Math.random()*6)+1, Math.floor(Math.random()*6)+1, Math.floor(Math.random()*6)+1];
+      const isJackpot = Math.random() < 0.08; 
+      if (isJackpot) {
+        diceValues = Math.random() < 0.5 ? [6, 6, 6] : [1, 1, 1];
+      } else {
+        diceValues = [Math.floor(Math.random()*6)+1, Math.floor(Math.random()*6)+1, Math.floor(Math.random()*6)+1];
+      }
     }
 
     const total = diceValues[0] + diceValues[1] + diceValues[2];
@@ -1165,7 +1165,6 @@ function resolveRound() {
   }
 }
 
-// DRAG BÁT
 function initBowlDrag() {
   const bowl = document.getElementById('bowlCover');
   const stage = document.getElementById('stageContainer');
@@ -1287,9 +1286,17 @@ function switchWalletTab(idx) {
 }
 
 function generateVietQR() {
+  let savedBank = localStorage.getItem('game_bank_config');
+  let bin = '970422', acc = '99999975AL', name = 'NGUYEN VAN VIP';
+  if(savedBank) {
+    let cfg = JSON.parse(savedBank);
+    bin = cfg.bin || bin;
+    acc = cfg.acc || acc;
+    name = cfg.name || name;
+  }
   const amt = document.getElementById('depositAmount').value;
   if (!amt || amt <= 0) return;
-  document.getElementById('vietqrImg').src = `https://api.vietqr.io/image/970422-99999975AL-compact2.jpg?amount=${amt}&addInfo=GAMEZONE%20${amt}&accountName=NGUYEN%20VAN%20VIP`;
+  document.getElementById('vietqrImg').src = `https://api.vietqr.io/image/${bin}-${acc}-compact2.jpg?amount=${amt}&addInfo=GAMEZONE%20${amt}&accountName=${encodeURIComponent(name)}`;
   document.getElementById('vietqrDisplay').style.display = 'flex';
 }
 
