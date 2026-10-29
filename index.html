@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>GAME ZONE VIP - CASINO 3D & CHAT ROOM</title>
+<title>GAME THỦ VIỆT- CASINO 3D & CHAT ROOM</title>
 <script src="https://cdn.tailwindcss.com"></script>
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 <style>
@@ -21,7 +21,7 @@
 
 :root {
   --bg-gradient: radial-gradient(circle at 50% 0%, #1c0c24 0%, #0c0614 50%, #05020a 100%);
-  --panel-bg: rgba(22, 14, 35, 0.92);
+  --panel-bg: rgba(22, 14, 35, 0.95);
   --gold: #ffd76a;
   --pink: #ff4fd8;
   --cyan: #38e8ff;
@@ -51,7 +51,7 @@ body {
   width: 100%;
   max-width: 520px;
   margin: 0 auto;
-  padding: 10px 12px 85px 12px;
+  padding: 10px 12px 90px 12px;
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -62,24 +62,24 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 8px 12px;
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  background: rgba(15, 10, 25, 0.9);
-  box-shadow: 0 0 15px var(--glow-color);
+  padding: 10px 14px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 18px;
+  background: rgba(15, 10, 25, 0.95);
+  box-shadow: 0 0 20px var(--glow-color);
 }
 
-.brand { display: flex; align-items: center; gap: 8px; }
-.brand-logo { font-size: 26px; filter: drop-shadow(0 0 8px var(--glow-color)); }
+.brand { display: flex; align-items: center; gap: 10px; }
+.brand-logo { font-size: 28px; filter: drop-shadow(0 0 10px var(--glow-color)); }
 .brand-text h1 {
-  font-size: 15px;
+  font-size: 16px;
   letter-spacing: 1px;
   background: linear-gradient(90deg, #fff, var(--glow-color), #ff9d4d);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   font-weight: 900;
 }
-.brand-text p { color: #8c90b5; font-size: 8px; font-weight: 700; letter-spacing: 1px; }
+.brand-text p { color: #a2a6cc; font-size: 9px; font-weight: 700; letter-spacing: 1px; }
 
 .user-profile-badge {
   display: flex;
@@ -88,8 +88,8 @@ body {
 }
 
 .avatar-btn {
-  width: 36px;
-  height: 36px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   border: 2px solid var(--border-color);
   background: linear-gradient(135deg, var(--violet), #110520);
@@ -98,48 +98,49 @@ body {
   justify-content: center;
   font-size: 18px;
   cursor: pointer;
-  box-shadow: 0 0 10px var(--glow-color);
+  box-shadow: 0 0 12px var(--glow-color);
   transition: transform 0.2s;
 }
 .avatar-btn:active { transform: scale(0.92); }
 
 .wallet-badge {
-  border: 1px solid var(--border-color);
-  background: rgba(15, 10, 25, 0.9);
-  border-radius: 20px;
-  padding: 4px 10px;
+  border: 1.5px solid var(--border-color);
+  background: rgba(15, 10, 25, 0.95);
+  border-radius: 22px;
+  padding: 6px 12px;
   display: flex;
   align-items: center;
-  gap: 5px;
+  gap: 6px;
   font-weight: bold;
-  font-size: 12px;
+  font-size: 13px;
   color: var(--gold);
   cursor: pointer;
-  box-shadow: 0 0 10px var(--glow-color);
+  box-shadow: 0 0 12px var(--glow-color);
 }
 
 /* MENU TABS */
 .menu-tabs {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
-  gap: 3px;
-  background: rgba(15, 10, 25, 0.6);
-  padding: 5px;
+  gap: 4px;
+  background: rgba(15, 10, 25, 0.7);
+  padding: 6px;
   border-radius: 14px;
-  margin-top: 6px;
+  margin-top: 8px;
   border: 1px solid var(--border-color);
 }
 .menu-tab-btn {
   background: transparent;
   border: 0;
-  color: #8c90b5;
+  color: #a2a6cc;
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 2px;
-  font-size: 8px;
+  gap: 3px;
+  font-size: 9px;
+  font-weight: 600;
   cursor: pointer;
-  padding: 5px 1px;
+  padding: 6px 2px;
   border-radius: 10px;
   transition: 0.2s;
   position: relative;
@@ -154,7 +155,7 @@ body {
 
 .mail-badge-dot {
   position: absolute;
-  top: 2px;
+  top: 3px;
   right: 6px;
   width: 8px;
   height: 8px;
@@ -176,20 +177,20 @@ body {
   display: flex;
   flex-direction: column;
   margin-top: 10px;
-  padding: 12px;
+  padding: 14px;
   position: relative;
 }
 
-.card-header-title { font-size: 14px; font-weight: 900; color: var(--glow-color); display:flex; justify-content:space-between; align-items:center; }
-.card-header-sub { font-size: 8px; color: #8c90b5; margin-top: 2px; }
+.card-header-title { font-size: 15px; font-weight: 900; color: var(--glow-color); display:flex; justify-content:space-between; align-items:center; }
+.card-header-sub { font-size: 9px; color: #a2a6cc; margin-top: 3px; }
 
 .stage-3d {
   position: relative;
-  height: 170px;
+  height: 180px;
   width: 100%;
-  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 255, 0.2), rgba(0,0,0,0.85));
+  background: radial-gradient(circle at 50% 50%, rgba(139, 92, 255, 0.25), rgba(0,0,0,0.9));
   border-radius: 14px;
-  margin-top: 6px;
+  margin-top: 8px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -204,7 +205,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
   top: 8px; right: 8px;
   background: linear-gradient(135deg, #ff0055, #ff5500);
   color: #fff;
-  padding: 3px 10px;
+  padding: 4px 10px;
   border-radius: 12px;
   font-weight: 900;
   font-size: 12px;
@@ -217,7 +218,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
   top: 8px; left: 8px;
   background: linear-gradient(135deg, #ffd76a, #ff9100);
   color: #111;
-  padding: 3px 8px;
+  padding: 4px 10px;
   border-radius: 12px;
   font-weight: 900;
   font-size: 10px;
@@ -251,7 +252,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   gap: 5px;
-  margin-top: 8px;
+  margin-top: 10px;
   background: rgba(0,0,0,0.5);
   padding: 8px;
   border-radius: 10px;
@@ -260,121 +261,122 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 }
 .cau-item {
   background: rgba(255,255,255,0.05);
-  padding: 4px;
+  padding: 5px 2px;
   border-radius: 6px;
 }
-.cau-item .lbl { font-size: 7px; color: #aaa; }
-.cau-item .val { font-size: 13px; font-weight: 900; color: var(--gold); }
+.cau-item .lbl { font-size: 7px; color: #aaa; text-transform: uppercase; }
+.cau-item .val { font-size: 12px; font-weight: 900; color: var(--gold); }
 
 .soi-road-bar {
-  display: grid; grid-template-columns: repeat(12, 1fr); gap: 3px;
-  padding: 5px 6px; background: rgba(0,0,0,0.5); border-radius: 8px; margin-top: 6px;
+  display: grid; grid-template-columns: repeat(12, 1fr); gap: 4px;
+  padding: 6px; background: rgba(0,0,0,0.5); border-radius: 8px; margin-top: 8px;
 }
 .road-dot {
   aspect-ratio: 1; border-radius: 50%; display: flex; align-items: center; justify-content: center;
-  font-size: 7px; font-weight: 900; color: #fff;
+  font-size: 8px; font-weight: 900; color: #fff;
 }
 .road-dot.tai { background: radial-gradient(circle at 30% 30%, #ff73fa, #a00088); }
 .road-dot.xiu { background: radial-gradient(circle at 30% 30%, #00f0ff, #0066b3); }
 
-.bet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; margin-top: 6px; position: relative; }
+.bet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 8px; position: relative; }
 .bet-option {
   background: linear-gradient(180deg, #1b1029, #0a0512);
-  border: 2px solid rgba(255,255,255,0.1);
-  border-radius: 12px; padding: 8px; text-align: center; cursor: pointer; transition: all 0.2s;
+  border: 2px solid rgba(255,255,255,0.12);
+  border-radius: 12px; padding: 10px; text-align: center; cursor: pointer; transition: all 0.2s;
   position: relative;
   overflow: hidden;
 }
 .bet-option.active { border-color: var(--border-color); box-shadow: 0 0 15px var(--glow-color); }
 .bet-option .title { font-size: 15px; font-weight: 900; }
-.bet-info-mini { display: flex; justify-content: space-between; font-size: 8px; color: var(--gold); margin-top: 3px; background: rgba(0,0,0,0.4); padding: 2px 4px; border-radius: 4px; }
+.bet-info-mini { display: flex; justify-content: space-between; font-size: 9px; color: var(--gold); margin-top: 4px; background: rgba(0,0,0,0.4); padding: 3px 6px; border-radius: 4px; }
 
 /* Hiệu ứng chip bay vào bàn cược */
 .flying-chip {
   position: absolute;
-  width: 24px;
-  height: 24px;
+  width: 26px;
+  height: 26px;
   border-radius: 50%;
   border: 2px dashed #fff;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 7px;
+  font-size: 8px;
   font-weight: 900;
   color: #fff;
-  box-shadow: 0 0 10px #000;
+  box-shadow: 0 0 12px #000;
   z-index: 50;
   pointer-events: none;
   transition: all 0.6s cubic-bezier(0.15, 0.85, 0.35, 1.2);
 }
 
 .chips-bar {
-  display: flex; gap: 5px; justify-content: flex-start; align-items: center;
-  padding: 5px 4px; background: rgba(0,0,0,0.3); border-radius: 10px; margin-top: 6px; overflow-x: auto;
+  display: flex; gap: 6px; justify-content: flex-start; align-items: center;
+  padding: 6px; background: rgba(0,0,0,0.3); border-radius: 10px; margin-top: 8px; overflow-x: auto;
 }
 .chip {
-  width: 32px; height: 32px; border-radius: 50%; border: 2px dashed #fff;
+  width: 34px; height: 34px; border-radius: 50%; border: 2px dashed #fff;
   display: flex; align-items: center; justify-content: center;
-  font-size: 8px; font-weight: 900; color: #fff; cursor: pointer; flex-shrink: 0;
+  font-size: 9px; font-weight: 900; color: #fff; cursor: pointer; flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.4);
 }
 
-.bet-display-box { display: flex; gap: 5px; align-items: center; margin-top: 5px; }
+.bet-display-box { display: flex; gap: 6px; align-items: center; margin-top: 8px; }
 .bet-input-box {
-  flex: 1; background: #09050e; border: 1px solid var(--border-color); color: var(--gold);
-  border-radius: 8px; padding: 6px; text-align: center; font-weight: bold; font-size: 12px;
+  flex: 1; background: #09050e; border: 1.5px solid var(--border-color); color: var(--gold);
+  border-radius: 10px; padding: 8px; text-align: center; font-weight: bold; font-size: 13px;
 }
 
-.action-controls { display: flex; gap: 6px; margin-top: 6px; }
+.action-controls { display: flex; gap: 8px; margin-top: 8px; }
 .btn-shake {
-  flex: 1; border: 0; border-radius: 16px; padding: 10px; font-size: 13px; font-weight: 900;
+  flex: 1; border: 0; border-radius: 14px; padding: 12px; font-size: 13px; font-weight: 900;
   color: #111; background: linear-gradient(180deg, #ffe875, #f0a800);
-  box-shadow: 0 0 12px var(--glow-color); cursor: pointer; text-align: center;
+  box-shadow: 0 0 15px var(--glow-color); cursor: pointer; text-align: center;
 }
 .btn-sub-ctrl {
-  background: rgba(25, 15, 40, 0.8); border: 1px solid var(--border-color);
-  border-radius: 10px; color: #fff; padding: 0 10px; font-weight: bold; font-size: 9px; cursor: pointer;
+  background: rgba(25, 15, 40, 0.9); border: 1.5px solid var(--border-color);
+  border-radius: 10px; color: #fff; padding: 0 12px; font-weight: bold; font-size: 10px; cursor: pointer;
 }
 
 /* KHUNG CHAT BẬT TẮT REALTIME */
 .chat-toggle-btn {
   position: fixed;
-  right: 12px;
-  bottom: 75px;
-  width: 44px;
-  height: 44px;
+  right: 14px;
+  bottom: 80px;
+  width: 46px;
+  height: 46px;
   border-radius: 50%;
   background: linear-gradient(135deg, var(--cyan), var(--violet));
   border: 2px solid #fff;
-  box-shadow: 0 0 15px var(--cyan);
+  box-shadow: 0 0 18px var(--cyan);
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 20px;
+  font-size: 22px;
   cursor: pointer;
   z-index: 800;
 }
 
 .chat-box-widget {
   position: fixed;
-  right: 12px;
-  bottom: 125px;
-  width: 280px;
-  height: 320px;
-  background: rgba(15, 8, 26, 0.95);
+  right: 14px;
+  bottom: 135px;
+  width: 290px;
+  height: 330px;
+  background: rgba(15, 8, 26, 0.96);
   border: 2px solid var(--border-color);
   border-radius: 16px;
-  backdrop-filter: blur(12px);
+  backdrop-filter: blur(14px);
   z-index: 800;
   display: none;
   flex-direction: column;
   overflow: hidden;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.85);
 }
 .chat-box-widget.show { display: flex; }
 
 .chat-header {
-  background: rgba(255,255,255,0.05);
-  padding: 8px 12px;
+  background: rgba(255,255,255,0.06);
+  padding: 10px 12px;
   font-size: 11px;
   font-weight: bold;
   color: var(--gold);
@@ -386,69 +388,69 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 
 .chat-messages {
   flex: 1;
-  padding: 8px;
+  padding: 10px;
   overflow-y: auto;
-  font-size: 10px;
+  font-size: 11px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 8px;
 }
 .chat-msg {
-  background: rgba(255,255,255,0.04);
-  padding: 4px 8px;
+  background: rgba(255,255,255,0.05);
+  padding: 6px 10px;
   border-radius: 8px;
 }
 .chat-msg b { color: var(--cyan); }
 
 .chat-input-area {
-  padding: 6px;
+  padding: 8px;
   display: flex;
-  gap: 4px;
+  gap: 6px;
   border-top: 1px solid rgba(255,255,255,0.08);
 }
 .chat-input {
   flex: 1;
-  background: rgba(0,0,0,0.5);
+  background: rgba(0,0,0,0.6);
   border: 1px solid var(--border-color);
   color: #fff;
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 10px;
+  border-radius: 8px;
+  padding: 6px 10px;
+  font-size: 11px;
   outline: none;
 }
 
 /* BOTTOM NAV */
 .bottom-nav {
-  position: fixed; left: 50%; bottom: 6px; transform: translateX(-50%);
-  width: min(500px, calc(100% - 12px)); display: grid; grid-template-columns: repeat(5, 1fr);
-  background: rgba(16, 9, 24, 0.96); border: 1px solid var(--border-color);
-  border-radius: 14px; backdrop-filter: blur(12px); z-index: 900; padding: 5px 0;
-  box-shadow: 0 0 15px var(--glow-color);
+  position: fixed; left: 50%; bottom: 8px; transform: translateX(-50%);
+  width: min(500px, calc(100% - 16px)); display: grid; grid-template-columns: repeat(5, 1fr);
+  background: rgba(16, 9, 24, 0.98); border: 1.5px solid var(--border-color);
+  border-radius: 16px; backdrop-filter: blur(14px); z-index: 900; padding: 6px 0;
+  box-shadow: 0 0 20px var(--glow-color);
 }
-.bottom-nav button { background: none; border: 0; color: #8c90b5; font-size: 8px; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 2px; }
+.bottom-nav button { background: none; border: 0; color: #a2a6cc; font-size: 9px; font-weight: 600; cursor: pointer; display: flex; flex-direction: column; align-items: center; gap: 3px; }
 .bottom-nav button.active { color: var(--gold); font-weight: bold; }
-.bottom-nav button span { font-size: 15px; }
+.bottom-nav button span { font-size: 16px; }
 
 /* MODALS */
 .modal-overlay {
-  position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(12px);
-  display: none; align-items: center; justify-content: center; z-index: 1000; padding: 15px;
+  position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(14px);
+  display: none; align-items: center; justify-content: center; z-index: 1000; padding: 16px;
 }
 .modal-overlay.show { display: flex; }
 .modal-content {
-  width: min(450px, 100%); background: rgba(20, 13, 30, 0.95);
-  border: 2px solid var(--border-color); border-radius: 18px; padding: 16px;
-  max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 50px rgba(0,0,0,0.8), 0 0 25px var(--glow-color);
+  width: min(440px, 100%); background: rgba(20, 13, 30, 0.96);
+  border: 2px solid var(--border-color); border-radius: 20px; padding: 18px;
+  max-height: 90vh; overflow-y: auto; box-shadow: 0 20px 50px rgba(0,0,0,0.85), 0 0 25px var(--glow-color);
 }
-.modal-content h3 { color: var(--gold); margin-bottom: 8px; text-align: center; font-size: 15px; font-weight: 900; }
-.modal-close-btn { width: 100%; margin-top: 10px; background: rgba(255,255,255,0.05); color: #caa66a; border: 1px solid var(--border-color); padding: 7px; border-radius: 8px; cursor: pointer; font-weight: bold; font-size: 10px; }
+.modal-content h3 { color: var(--gold); margin-bottom: 10px; text-align: center; font-size: 16px; font-weight: 900; }
+.modal-close-btn { width: 100%; margin-top: 12px; background: rgba(255,255,255,0.06); color: var(--gold); border: 1px solid var(--border-color); padding: 9px; border-radius: 10px; cursor: pointer; font-weight: bold; font-size: 11px; }
 
-.wallet-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-bottom: 8px; background: rgba(0,0,0,0.4); padding: 3px; border-radius: 6px; border: 1px solid var(--border-color); }
-.wallet-tab-btn { background: transparent; border: 0; color: #8c90b5; padding: 5px 2px; border-radius: 5px; font-weight: bold; cursor: pointer; font-size: 8px; }
+.wallet-tabs { display: grid; grid-template-columns: repeat(4, 1fr); gap: 4px; margin-bottom: 10px; background: rgba(0,0,0,0.5); padding: 4px; border-radius: 8px; border: 1px solid var(--border-color); }
+.wallet-tab-btn { background: transparent; border: 0; color: #a2a6cc; padding: 6px 2px; border-radius: 6px; font-weight: bold; cursor: pointer; font-size: 9px; }
 .wallet-tab-btn.active { background: linear-gradient(135deg, var(--violet), #5b21b6); color: #fff; }
 .wallet-section { display: none; }
 .wallet-section.active { display: block; }
-.form-control { width: 100%; background: rgba(0,0,0,0.5); border: 1px solid var(--border-color); color: #fff; padding: 7px; border-radius: 6px; margin-top: 3px; margin-bottom: 6px; font-size: 10px; outline: none; }
+.form-control { width: 100%; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); color: #fff; padding: 9px; border-radius: 8px; margin-top: 4px; margin-bottom: 8px; font-size: 11px; outline: none; }
 </style>
 </head>
 <body>
@@ -490,7 +492,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
     <div class="card-panel">
       <div class="card-header-title">
         <span>🎲 XÚC XẮC TÀI XỈU 3D</span>
-        <button class="btn-sub-ctrl" style="padding:3px 6px;" onclick="openModal('historyModal')">📊 LỊCH SỬ</button>
+        <button class="btn-sub-ctrl" style="padding:4px 8px;" onclick="openModal('historyModal')">📊 LỊCH SỬ</button>
       </div>
       <div class="card-header-sub">Từ 30s-13s cược | 13s-2s kéo nặn bát xem kết quả!</div>
 
@@ -500,8 +502,8 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
         <canvas id="diceCanvas" class="game-canvas"></canvas>
         <div class="bowl-cover-round" id="bowlCover" style="display: none;">
           <div style="text-align:center; pointer-events:none;">
-            <div id="bowlCoverText" style="font-size:10px;color:var(--gold);">ÚP BÁT</div>
-            <div style="font-size:7px;color:#ddd;" id="bowlSubText">Kéo để nặn</div>
+            <div id="bowlCoverText" style="font-size:11px;color:var(--gold);">ÚP BÁT</div>
+            <div style="font-size:8px;color:#ddd;" id="bowlSubText">Kéo để nặn</div>
           </div>
         </div>
       </div>
@@ -541,7 +543,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 
       <div class="bet-display-box">
         <input type="text" id="customBetDisplay" class="bet-input-box" value="0đ" readonly>
-        <button class="btn-sub-ctrl" style="padding:6px 10px; background:var(--red);" onclick="clearBet()">Xóa</button>
+        <button class="btn-sub-ctrl" style="padding:8px 12px; background:var(--red);" onclick="clearBet()">Xóa</button>
       </div>
 
       <div class="action-controls">
@@ -555,19 +557,19 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
     <div class="card-panel">
       <div class="card-header-title">🃏 BACCARAT 3D VIP</div>
       <div class="card-header-sub">Mức cược chuẩn từ 50.000đ đến 1.000.000đ</div>
-      <div class="stage-3d" style="flex-direction:column; gap:6px; padding:8px;">
-        <div style="display:flex; justify-content:space-around; width:100%; font-size:10px;">
+      <div class="stage-3d" style="flex-direction:column; gap:8px; padding:10px;">
+        <div style="display:flex; justify-content:space-around; width:100%; font-size:11px;">
           <div><b>PLAYER:</b> <span id="bacPlayerCards" style="color:var(--cyan);">--</span> (Điểm: <b id="bacPlayerScore">0</b>)</div>
           <div><b>BANKER:</b> <span id="bacBankerCards" style="color:var(--pink);">--</span> (Điểm: <b id="bacBankerScore">0</b>)</div>
         </div>
         <div id="bacResultBanner" style="font-size:13px; font-weight:900; color:var(--gold); text-align:center;">Chờ đặt cược vòng mới...</div>
       </div>
-      <div class="baccarat-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:6px; margin-top:6px;">
-        <div class="bet-option" id="btnPlayer" onclick="selectBacBet('PLAYER')"><div class="title" style="color:var(--cyan);">PLAYER</div><div class="sub" style="font-size:8px;color:var(--gold);">1 : 1</div></div>
-        <div class="bet-option" id="btnTie" onclick="selectBacBet('TIE')"><div class="title" style="color:var(--gold);">TIE</div><div class="sub" style="font-size:8px;color:var(--gold);">1 : 8</div></div>
-        <div class="bet-option" id="btnBanker" onclick="selectBacBet('BANKER')"><div class="title" style="color:var(--pink);">BANKER</div><div class="sub" style="font-size:8px;color:var(--gold);">1 : 0.95</div></div>
+      <div class="baccarat-grid" style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:8px;">
+        <div class="bet-option" id="btnPlayer" onclick="selectBacBet('PLAYER')"><div class="title" style="color:var(--cyan);">PLAYER</div><div class="sub" style="font-size:9px;color:var(--gold);">1 : 1</div></div>
+        <div class="bet-option" id="btnTie" onclick="selectBacBet('TIE')"><div class="title" style="color:var(--gold);">TIE</div><div class="sub" style="font-size:9px;color:var(--gold);">1 : 8</div></div>
+        <div class="bet-option" id="btnBanker" onclick="selectBacBet('BANKER')"><div class="title" style="color:var(--pink);">BANKER</div><div class="sub" style="font-size:9px;color:var(--gold);">1 : 0.95</div></div>
       </div>
-      <div class="chips-bar" style="margin-top:8px;">
+      <div class="chips-bar" style="margin-top:10px;">
         <div class="chip" onclick="addBacBet(50000)" style="background:radial-gradient(#29b6f6,#01579b)">50K</div>
         <div class="chip" onclick="addBacBet(100000)" style="background:radial-gradient(#1e88e5,#0d47a1)">100K</div>
         <div class="chip" onclick="addBacBet(500000)" style="background:radial-gradient(#43a047,#1b5e20)">500K</div>
@@ -575,7 +577,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
       </div>
       <div class="bet-display-box">
         <input type="text" id="bacBetDisplay" class="bet-input-box" value="0đ" readonly>
-        <button class="btn-sub-ctrl" style="padding:6px 10px; background:var(--red);" onclick="clearBacBet()">Xóa</button>
+        <button class="btn-sub-ctrl" style="padding:8px 12px; background:var(--red);" onclick="clearBacBet()">Xóa</button>
       </div>
       <div class="action-controls">
         <button class="btn-shake" onclick="placeBaccaratBet()">CHIA BÀI & XÁC NHẬN</button>
@@ -597,7 +599,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
   </div>
   <div class="chat-input-area">
     <input type="text" id="chatInputField" class="chat-input" placeholder="Nhập tin nhắn..." onkeypress="handleChatKeyPress(event)">
-    <button class="btn-sub-ctrl" style="padding:4px 8px; background:var(--gold); color:#000;" onclick="sendChatMessage()">Gửi</button>
+    <button class="btn-sub-ctrl" style="padding:6px 10px; background:var(--gold); color:#000;" onclick="sendChatMessage()">Gửi</button>
   </div>
 </div>
 
@@ -613,30 +615,34 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 <!-- MODAL ĐĂNG NHẬP / ĐĂNG KÝ & ĐẶT TÊN NHÂN VẬT -->
 <div class="modal-overlay show" id="authModal">
   <div class="modal-content" style="border-color:var(--gold);">
-    <div style="font-size:32px; text-align:center; margin-bottom:4px;">👑</div>
+    <div style="font-size:34px; text-align:center; margin-bottom:6px;">👑</div>
     <h3 id="authTitle" style="color:var(--gold);">ĐĂNG NHẬP HỆ THỐNG</h3>
     
-    <div class="wallet-tabs" style="grid-template-columns: 1fr 1fr; margin-bottom: 10px;">
+    <div class="wallet-tabs" style="grid-template-columns: 1fr 1fr; margin-bottom: 12px;">
       <button class="wallet-tab-btn active" id="tabLoginBtn" onclick="switchAuthTab('login')">Đăng Nhập</button>
       <button class="wallet-tab-btn" id="tabRegisterBtn" onclick="switchAuthTab('register')">Đăng Ký Tài Khoản</button>
     </div>
 
     <div id="loginFormSection">
-      <label style="font-size:10px; color:#aaa;">Tên tài khoản:</label>
+      <label style="font-size:11px; color:#aaa;">Tên tài khoản:</label>
       <input type="text" id="loginUsername" class="form-control" placeholder="Nhập tên tài khoản">
-      <label style="font-size:10px; color:#aaa;">Mật khẩu:</label>
+      <label style="font-size:11px; color:#aaa;">Mật khẩu:</label>
       <input type="password" id="loginPassword" class="form-control" placeholder="Nhập mật khẩu">
-      <button class="btn-shake" style="width:100%; padding:10px; font-size:12px; margin-top:6px;" onclick="handleLogin()">ĐĂNG NHẬP NGAY</button>
+      <button class="btn-shake" style="width:100%; padding:11px; font-size:13px; margin-top:8px;" onclick="handleLogin()">ĐĂNG NHẬP NGAY</button>
     </div>
 
     <div id="registerFormSection" style="display:none;">
-      <label style="font-size:10px; color:#aaa;">Tên tài khoản mới:</label>
+      <label style="font-size:11px; color:#aaa;">Tên tài khoản mới:</label>
       <input type="text" id="regUsername" class="form-control" placeholder="Tạo tài khoản đăng nhập">
-      <label style="font-size:10px; color:#aaa;">Tên nhân vật trong game (Hiển thị):</label>
+      <label style="font-size:11px; color:#aaa;">Tên nhân vật trong game (Hiển thị):</label>
       <input type="text" id="regNickname" class="form-control" placeholder="Nhập tên hiển thị của bạn">
-      <label style="font-size:10px; color:#aaa;">Mật khẩu:</label>
+      <label style="font-size:11px; color:#aaa;">Mật khẩu:</label>
       <input type="password" id="regPassword" class="form-control" placeholder="Tạo mật khẩu bảo mật">
-      <button class="btn-shake" style="width:100%; padding:10px; font-size:12px; margin-top:6px; background:linear-gradient(180deg,#38e8ff,#0088cc); color:#000;" onclick="handleRegister()">ĐĂNG KÝ & TẠO NHÂN VẬT</button>
+      
+      <!-- Thẻ hiển thị thông báo Đăng ký chữ màu đỏ -->
+      <div id="regMessage" style="font-size:11px; margin-top:4px; font-weight:bold; color:var(--red);"></div>
+
+      <button class="btn-shake" style="width:100%; padding:11px; font-size:13px; margin-top:8px; background:linear-gradient(180deg,#38e8ff,#0088cc); color:#000;" onclick="handleRegister()">ĐĂNG KÝ & TẠO NHÂN VẬT</button>
     </div>
   </div>
 </div>
@@ -644,14 +650,14 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 <!-- MODAL CẢNH BÁO TRANG GIẢ MẠO -->
 <div class="modal-overlay" id="alertModal">
   <div class="modal-content" style="border-color:var(--red); text-align:center;">
-    <div style="font-size:36px; margin-bottom:4px;">⚠️</div>
+    <div style="font-size:38px; margin-bottom:6px;">⚠️</div>
     <h3 style="color:var(--red);">CẢNH BÁO TRANG LỪA ĐẢO</h3>
-    <div style="background:rgba(255,61,103,0.15); border:1px solid var(--red); padding:10px; border-radius:10px; font-size:10px; color:#fff; text-align:left; line-height:1.5; margin-bottom:10px;">
+    <div style="background:rgba(255,61,103,0.15); border:1px solid var(--red); padding:12px; border-radius:10px; font-size:11px; color:#fff; text-align:left; line-height:1.6; margin-bottom:12px;">
       <b>Quý khách lưu ý:</b> Hiện nay có rất nhiều trang web giả mạo thương hiệu <b>GAME ZONE VIP</b> nhằm chiếm đoạt tài khoản và tiền của người chơi.<br><br>
       📌 Chỉ truy cập qua đường link chính thức.<br>
       📌 Nhân viên CSKH <b>KHÔNG BAO GIỜ</b> yêu cầu cung cấp Mật khẩu hoặc Mã OTP.
     </div>
-    <button class="btn-shake" style="width:100%; padding:9px; font-size:12px; background:linear-gradient(180deg,#ff3d67,#c2185b); color:#fff;" onclick="closeModal('alertModal')">I CHẤP NHẬN & ĐÃ HIỂU</button>
+    <button class="btn-shake" style="width:100%; padding:10px; font-size:13px; background:linear-gradient(180deg,#ff3d67,#c2185b); color:#fff;" onclick="closeModal('alertModal')">I CHẤP NHẬN & ĐÃ HIỂU</button>
   </div>
 </div>
 
@@ -660,20 +666,20 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
   <div class="modal-content">
     <h3>📫 HÒM THƯ HỆ THỐNG</h3>
     <div style="display:flex; flex-direction:column; gap:8px; max-height:250px; overflow-y:auto;" id="mailList">
-      <div style="background:rgba(255,255,255,0.04); padding:8px; border-radius:8px; border-left:3px solid var(--gold);">
-        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:11px;">
+      <div style="background:rgba(255,255,255,0.05); padding:10px; border-radius:10px; border-left:3px solid var(--gold);">
+        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:12px;">
           <span>🎁 Quà Tặng Tân Thủ</span>
-          <span style="font-size:8px; color:#aaa;">Vừa xong</span>
+          <span style="font-size:9px; color:#aaa;">Vừa xong</span>
         </div>
-        <div style="font-size:9px; color:#ccc; margin-top:3px;">Chào mừng bạn đến với Game Zone VIP! Nhận ngay 100.000đ lộc khởi nghiệp.</div>
-        <button class="btn-sub-ctrl" style="margin-top:5px; background:var(--green); color:#000; padding:2px 8px;" onclick="claimMailReward(this, 100000)">NHẬN QUÀ (+100K)</button>
+        <div style="font-size:10px; color:#ccc; margin-top:4px;">Chào mừng bạn đến với Game Zone VIP! Nhận ngay 100.000đ lộc khởi nghiệp.</div>
+        <button class="btn-sub-ctrl" style="margin-top:6px; background:var(--green); color:#000; padding:4px 10px;" onclick="claimMailReward(this, 100000)">NHẬN QUÀ (+100K)</button>
       </div>
-      <div style="background:rgba(255,255,255,0.04); padding:8px; border-radius:8px; border-left:3px solid var(--cyan);">
-        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:11px;">
+      <div style="background:rgba(255,255,255,0.05); padding:10px; border-radius:10px; border-left:3px solid var(--cyan);">
+        <div style="display:flex; justify-content:space-between; font-weight:bold; font-size:12px;">
           <span>📢 Thông Báo Bảo Trì Server</span>
-          <span style="font-size:8px; color:#aaa;">Hôm nay</span>
+          <span style="font-size:9px; color:#aaa;">Hôm nay</span>
         </div>
-        <div style="font-size:9px; color:#ccc; margin-top:3px;">Hệ thống nâng cấp cụm máy chủ 3D hoàn tất. Chúc quý khách chơi game vui vẻ!</div>
+        <div style="font-size:10px; color:#ccc; margin-top:4px;">Hệ thống nâng cấp cụm máy chủ 3D hoàn tất. Chúc quý khách chơi game vui vẻ!</div>
       </div>
     </div>
     <button class="modal-close-btn" onclick="closeModal('mailboxModal')">ĐÓNG</button>
@@ -684,21 +690,21 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 <div class="modal-overlay" id="profileModal">
   <div class="modal-content">
     <h3>👤 TÀI KHOẢN CÁ NHÂN VIP</h3>
-    <div style="text-align:center; margin-bottom:12px;">
-      <div style="width:60px; height:60px; border-radius:50%; border:2px solid var(--gold); background:var(--violet); margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:28px;">👤</div>
-      <div style="font-weight:bold; font-size:14px; margin-top:4px;" id="profileUsername">VIP_PLAYER_75AL</div>
-      <div style="font-size:10px; color:var(--cyan);" id="profilePhoneStatus">Chưa liên kết SĐT</div>
+    <div style="text-align:center; margin-bottom:14px;">
+      <div style="width:64px; height:64px; border-radius:50%; border:2px solid var(--gold); background:var(--violet); margin:0 auto; display:flex; align-items:center; justify-content:center; font-size:30px;">👤</div>
+      <div style="font-weight:bold; font-size:15px; margin-top:6px;" id="profileUsername">VIP_PLAYER_75AL</div>
+      <div style="font-size:11px; color:var(--cyan); margin-top:2px;" id="profilePhoneStatus">Chưa liên kết SĐT</div>
     </div>
 
-    <div style="background:rgba(0,0,0,0.4); padding:10px; border-radius:10px; margin-bottom:10px;">
-      <label style="font-size:10px; color:#aaa;">Liên kết SĐT nhận ngay +50K:</label>
-      <div style="display:flex; gap:4px; margin-top:4px;">
+    <div style="background:rgba(0,0,0,0.45); padding:12px; border-radius:12px; margin-bottom:12px;">
+      <label style="font-size:11px; color:#aaa;">Liên kết SĐT nhận ngay +50K:</label>
+      <div style="display:flex; gap:6px; margin-top:6px;">
         <input type="text" id="phoneInput" class="form-control" style="margin:0;" placeholder="Nhập số điện thoại">
-        <button class="btn-sub-ctrl" style="background:var(--green); color:#000; padding:0 10px;" onclick="linkPhoneNumber()">LIÊN KẾT</button>
+        <button class="btn-sub-ctrl" style="background:var(--green); color:#000; padding:0 12px;" onclick="linkPhoneNumber()">LIÊN KẾT</button>
       </div>
     </div>
 
-    <button class="btn-shake" style="width:100%; padding:9px; font-size:12px; margin-bottom:6px; background:linear-gradient(180deg,#ff3d67,#c2185b); color:#fff;" onclick="logoutAccount()">ĐĂNG XUẤT TÀI KHOẢN</button>
+    <button class="btn-shake" style="width:100%; padding:10px; font-size:13px; margin-bottom:8px; background:linear-gradient(180deg,#ff3d67,#c2185b); color:#fff;" onclick="logoutAccount()">ĐĂNG XUẤT TÀI KHOẢN</button>
     <button class="modal-close-btn" onclick="closeModal('profileModal')">ĐÓNG</button>
   </div>
 </div>
@@ -708,7 +714,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
   <div class="modal-content">
     <h3>🎁 NHẬP GIFTCODE NHẬN THƯỞNG</h3>
     <input type="text" id="giftcodeInput" class="form-control" placeholder="VD: GAMEZONE2026">
-    <button class="btn-shake" style="width:100%;padding:9px;font-size:12px;" onclick="claimGiftcode()">XÁC NHẬN</button>
+    <button class="btn-shake" style="width:100%;padding:10px;font-size:13px;" onclick="claimGiftcode()">XÁC NHẬN</button>
     <button class="modal-close-btn" onclick="closeModal('codeModal')">ĐÓNG</button>
   </div>
 </div>
@@ -717,7 +723,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 <div class="modal-overlay" id="rankModal">
   <div class="modal-content">
     <h3>🏆 BẢNG VÀNG ĐUA TOP (1 - 10)</h3>
-    <div style="display:flex;flex-direction:column;gap:4px; max-height:220px; overflow-y:auto;" id="topListContainer"></div>
+    <div style="display:flex;flex-direction:column;gap:6px; max-height:240px; overflow-y:auto;" id="topListContainer"></div>
     <button class="modal-close-btn" onclick="closeModal('rankModal')">ĐÓNG</button>
   </div>
 </div>
@@ -726,9 +732,9 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 <div class="modal-overlay" id="cskhModal">
   <div class="modal-content">
     <h3>🎧 CHĂM SÓC KHÁCH HÀNG 24/7</h3>
-    <div style="background:rgba(0,0,0,0.4); padding:10px; border-radius:10px; text-align:center; margin-bottom:8px;">
+    <div style="background:rgba(0,0,0,0.45); padding:12px; border-radius:12px; text-align:center; margin-bottom:10px;">
       <div style="font-size:12px; color:var(--gold); font-weight:bold;">Telegram CSKH:</div>
-      <div style="font-size:14px; color:var(--cyan); font-weight:900; margin-top:4px;">@GameZone_VIP75</div>
+      <div style="font-size:15px; color:var(--cyan); font-weight:900; margin-top:6px;">@GameZone_VIP75</div>
     </div>
     <button class="modal-close-btn" onclick="closeModal('cskhModal')">ĐÓNG</button>
   </div>
@@ -738,7 +744,7 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 <div class="modal-overlay" id="walletModal">
   <div class="modal-content">
     <h3>💳 NẠP RÚT GAME ZONE</h3>
-    <p style="text-align:center;font-size:10px;color:#aaa;margin-bottom:6px;">Ví Hiện Tại: <b style="color:var(--gold);font-size:13px;" id="modalBalance">12,450,000đ</b></p>
+    <p style="text-align:center;font-size:11px;color:#aaa;margin-bottom:8px;">Ví Hiện Tại: <b style="color:var(--gold);font-size:14px;" id="modalBalance">12,450,000đ</b></p>
     <div class="wallet-tabs">
       <button class="wallet-tab-btn active" onclick="switchWalletTab(0)">Nạp VietQR</button>
       <button class="wallet-tab-btn" onclick="switchWalletTab(1)">Rút Tiền</button>
@@ -746,24 +752,24 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
       <button class="wallet-tab-btn" onclick="switchWalletTab(3)">Lịch Sử</button>
     </div>
     <div class="wallet-section active" id="wSection0">
-      <label style="font-size:10px;color:#aaa;">Số tiền nạp (VNĐ):</label>
+      <label style="font-size:11px;color:#aaa;">Số tiền nạp (VNĐ):</label>
       <input type="number" id="depositAmount" class="form-control" value="500000">
-      <button class="btn-shake" style="width:100%;padding:9px;font-size:11px;" onclick="generateVietQR()">TẠO MÃ VIETQR</button>
-      <div id="vietqrDisplay" style="display:none; margin-top:6px;" class="vietqr-box-3d">
-        <img id="vietqrImg" src="" alt="QR" style="width:120px;height:120px;background:#fff;border-radius:6px;padding:4px;">
-        <div style="margin-top:5px;font-size:9px;text-align:center;">
+      <button class="btn-shake" style="width:100%;padding:10px;font-size:12px;" onclick="generateVietQR()">TẠO MÃ VIETQR</button>
+      <div id="vietqrDisplay" style="display:none; margin-top:8px; flex-direction:column; align-items:center;" class="vietqr-box-3d">
+        <img id="vietqrImg" src="" alt="QR" style="width:130px;height:130px;background:#fff;border-radius:8px;padding:4px;">
+        <div style="margin-top:6px;font-size:10px;text-align:center;">
           <div>STK: <b style="color:var(--gold);">99999975AL</b></div>
         </div>
-        <button class="btn-shake" style="margin-top:5px;padding:5px 10px;font-size:9px;background:linear-gradient(180deg,#00e676,#00a854);color:#fff;" onclick="confirmDeposit()">ĐÃ CHUYỂN KHOẢN</button>
+        <button class="btn-shake" style="margin-top:6px;padding:6px 12px;font-size:10px;background:linear-gradient(180deg,#00e676,#00a854);color:#fff;" onclick="confirmDeposit()">ĐÃ CHUYỂN KHOẢN</button>
       </div>
     </div>
     <div class="wallet-section" id="wSection1">
-      <label style="font-size:10px;color:#aaa;">Số tiền rút (VNĐ):</label>
+      <label style="font-size:11px;color:#aaa;">Số tiền rút (VNĐ):</label>
       <input type="number" id="withdrawAmount" class="form-control" placeholder="Nhập số tiền rút">
-      <button class="btn-shake" style="width:100%;padding:9px;font-size:11px;background:linear-gradient(180deg,#ff4fd8,#b80086);color:#fff;" onclick="doWithdraw()">RÚT TIỀN</button>
+      <button class="btn-shake" style="width:100%;padding:10px;font-size:12px;background:linear-gradient(180deg,#ff4fd8,#b80086);color:#fff;" onclick="doWithdraw()">RÚT TIỀN</button>
     </div>
     <div class="wallet-section" id="wSection2">
-      <label style="font-size:10px;color:#aaa;">Chọn Ngân Hàng Nhận:</label>
+      <label style="font-size:11px;color:#aaa;">Chọn Ngân Hàng Nhận:</label>
       <select id="bankNameInput" class="form-control">
         <option value="Vietcombank">Vietcombank (VCB)</option>
         <option value="Techcombank">Techcombank (TCB)</option>
@@ -776,12 +782,12 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
         <option value="Sacombank">Sacombank</option>
         <option value="TPBank">TPBank</option>
       </select>
-      <label style="font-size:10px;color:#aaa;">Số Tài Khoản:</label>
+      <label style="font-size:11px;color:#aaa;">Số Tài Khoản:</label>
       <input type="text" id="bankAccInput" class="form-control" placeholder="Nhập số tài khoản">
-      <button class="btn-shake" style="width:100%;padding:7px;font-size:11px;" onclick="alert('Đã lưu thông tin ngân hàng thành công!')">LƯU THÔNG TIN</button>
+      <button class="btn-shake" style="width:100%;padding:8px;font-size:12px;" onclick="alert('Đã lưu thông tin ngân hàng thành công!')">LƯU THÔNG TIN</button>
     </div>
     <div class="wallet-section" id="wSection3">
-      <div id="txHistoryList" style="max-height:130px;overflow-y:auto;font-size:9px;"><p style="text-align:center;color:#888;">Chưa có giao dịch.</p></div>
+      <div id="txHistoryList" style="max-height:140px;overflow-y:auto;font-size:10px;"><p style="text-align:center;color:#888;">Chưa có giao dịch.</p></div>
     </div>
     <button class="modal-close-btn" onclick="closeModal('walletModal')">ĐÓNG</button>
   </div>
@@ -789,14 +795,18 @@ canvas.game-canvas { position: absolute; top: 0; left: 0; width: 100%; height: 1
 
 <script>
 let currentUser = null;
-let balance = 12450000;
-let jackpotAmount = 1000000000;
+// Khôi phục dữ liệu từ localStorage để không bị mất khi tải lại trang
+let balance = parseInt(localStorage.getItem('game_balance')) || 12450000;
+let jackpotAmount = parseInt(localStorage.getItem('game_jackpot')) || 1000000000;
 let currentBetAmount = 0;
 let selectedSide = null;
 let userPlacedBet = null;
 let timeLeft = 30;
 let diceValues = [4, 1, 6];
-let roadHistory = ['tai', 'xiu', 'tai', 'tai', 'xiu', 'xiu', 'tai', 'xiu', 'tai', 'xiu'];
+
+let savedRoad = localStorage.getItem('game_road_history');
+let roadHistory = savedRoad ? JSON.parse(savedRoad) : ['tai', 'xiu', 'tai', 'tai', 'xiu', 'xiu', 'tai', 'xiu', 'tai', 'xiu'];
+
 let bowlOpened = false;
 let userPhoneLinked = false;
 
@@ -805,6 +815,13 @@ let bacBetAmount = 0;
 let bacSelectedSide = null;
 
 function formatMoney(num) { return num.toLocaleString('vi-VN'); }
+
+// Lưu trữ trạng thái game vào localStorage
+function saveGameState() {
+  localStorage.setItem('game_balance', balance);
+  localStorage.setItem('game_jackpot', jackpotAmount);
+  localStorage.setItem('game_road_history', JSON.stringify(roadHistory));
+}
 
 function updateUI() {
   document.getElementById('userBalance').innerText = formatMoney(balance);
@@ -815,6 +832,7 @@ function updateUI() {
   if(currentUser) {
     document.getElementById('profileUsername').innerText = currentUser.nickname;
   }
+  saveGameState(); 
 }
 
 // XỬ LÝ AUTH (ĐĂNG NHẬP / ĐĂNG KÝ)
@@ -838,23 +856,31 @@ function handleRegister() {
   const username = document.getElementById('regUsername').value.trim();
   const nickname = document.getElementById('regNickname').value.trim();
   const password = document.getElementById('regPassword').value.trim();
+  const msgEl = document.getElementById('regMessage');
 
   if(!username || !nickname || !password) {
-    alert('Vui lòng điền đầy đủ thông tin đăng ký!');
+    msgEl.style.color = 'var(--red)';
+    msgEl.innerText = '⚠️ Vui lòng điền đầy đủ thông tin đăng ký!';
     return;
   }
 
   let users = JSON.parse(localStorage.getItem('game_users') || '{}');
   if(users[username]) {
-    alert('Tên tài khoản này đã tồn tại, vui lòng chọn tên khác!');
+    msgEl.style.color = 'var(--red)';
+    msgEl.innerText = '⚠️ Tên tài khoản này đã tồn tại, vui lòng chọn tên khác!';
     return;
   }
 
   users[username] = { password: password, nickname: nickname, balance: 500000 };
   localStorage.setItem('game_users', JSON.stringify(users));
 
-  alert('🎉 Đăng ký tài khoản và tạo nhân vật thành công! Vui lòng đăng nhập.');
-  switchAuthTab('login');
+  msgEl.style.color = 'var(--red)';
+  msgEl.innerText = '🎉 Đăng ký thành công! Vui lòng chuyển sang tab Đăng Nhập.';
+  
+  setTimeout(() => {
+    switchAuthTab('login');
+    msgEl.innerText = '';
+  }, 1500);
 }
 
 function handleLogin() {
@@ -905,26 +931,23 @@ function animateFlyingChip(targetElementId) {
   chip.innerText = currentBetAmount >= 1000000 ? (currentBetAmount/1000000)+'M' : (currentBetAmount >= 1000 ? (currentBetAmount/1000)+'K' : currentBetAmount);
   chip.style.background = 'radial-gradient(#fb8c00, #e65100)';
   
-  // Vị trí xuất phát (từ thanh chip)
-  chip.style.left = (barRect.left + barRect.width / 2 - 12) + 'px';
+  chip.style.left = (barRect.left + barRect.width / 2 - 13) + 'px';
   chip.style.top = (barRect.top + 10) + 'px';
   document.body.appendChild(chip);
 
-  // Bay đến vị trí bàn cược
   setTimeout(() => {
-    chip.style.left = (targetRect.left + targetRect.width / 2 - 12) + 'px';
-    chip.style.top = (targetRect.top + targetRect.height / 2 - 12) + 'px';
+    chip.style.left = (targetRect.left + targetRect.width / 2 - 13) + 'px';
+    chip.style.top = (targetRect.top + targetRect.height / 2 - 13) + 'px';
     chip.style.transform = 'scale(1.2) rotate(360deg)';
     chip.style.opacity = '0.9';
   }, 20);
 
-  // Xóa chip sau khi bay xong
   setTimeout(() => {
     chip.remove();
   }, 650);
 }
 
-// CÁ NHÂN & SĐT & HÒM THƯ
+// CÁ NHÂN & SĐT & HÒM THƯ (Đã đồng bộ trạng thái lưu localStorage)
 function linkPhoneNumber() {
   const phone = document.getElementById('phoneInput').value.trim();
   if (phone.length < 9) { alert('Vui lòng nhập SĐT hợp lệ!'); return; }
@@ -937,12 +960,31 @@ function linkPhoneNumber() {
 }
 
 function claimMailReward(btn, amt) {
+  localStorage.setItem('game_mail_claimed', 'true');
   balance += amt;
   updateUI();
+  applyClaimedMailStyle(btn);
+  document.getElementById('mailBadge').style.display = 'none';
+  alert('🎁 Nhận quà thành công +' + formatMoney(amt) + 'đ!');
+}
+
+function applyClaimedMailStyle(btn) {
   btn.disabled = true;
   btn.innerText = 'ĐÃ NHẬN';
   btn.style.background = '#555';
-  document.getElementById('mailBadge').style.display = 'none';
+  btn.style.color = '#fff';
+}
+
+function checkMailboxState() {
+  const isClaimed = localStorage.getItem('game_mail_claimed');
+  if (isClaimed === 'true') {
+    const mailBtn = document.querySelector('#mailList button');
+    if (mailBtn) {
+      applyClaimedMailStyle(mailBtn);
+    }
+    const badge = document.getElementById('mailBadge');
+    if (badge) badge.style.display = 'none';
+  }
 }
 
 // CHAT BOX REALTIME
@@ -1010,7 +1052,6 @@ function placeBetOnline() {
 
   userPlacedBet = { side: selectedSide, amount: currentBetAmount };
   
-  // Chạy hiệu ứng chip bay thay vì hiện bảng thông báo alert
   animateFlyingChip(selectedSide === 'TAI' ? 'btnTai' : 'btnXiu');
 
   updateUI();
@@ -1217,7 +1258,7 @@ function initTopList() {
     let color = i === 0 ? 'var(--gold)' : (i === 1 ? 'var(--cyan)' : (i === 2 ? 'var(--pink)' : '#fff'));
     let medal = i === 0 ? '🥇' : (i === 1 ? '🥈' : (i === 2 ? '🥉' : `#${i+1}`));
     html += `
-      <div style="background:rgba(255,255,255,0.03); padding:6px 8px; border-radius:6px; display:flex; justify-content:space-between; align-items:center; font-size:10px;">
+      <div style="background:rgba(255,255,255,0.04); padding:8px 10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center; font-size:11px;">
         <div><b>${medal} ${names[i]}</b></div>
         <div style="color:${color}; font-weight:bold;">${score}đ</div>
       </div>
@@ -1232,6 +1273,9 @@ function claimGiftcode() {
     balance += 100000;
     updateUI();
     closeModal('codeModal');
+    alert('🎉 Nhận giftcode thành công +100.000đ!');
+  } else {
+    alert('Mã Giftcode không hợp lệ hoặc đã hết hạn!');
   }
 }
 
@@ -1254,14 +1298,19 @@ function confirmDeposit() {
   balance += amt;
   updateUI();
   closeModal('walletModal');
+  alert('✨ Nạp tiền thành công vào tài khoản!');
 }
 
 function doWithdraw() {
   const amt = parseInt(document.getElementById('withdrawAmount').value) || 0;
-  if (amt <= 0 || amt > balance) return;
+  if (amt <= 0 || amt > balance) {
+    alert('Số tiền rút không hợp lệ hoặc vượt quá số dư!');
+    return;
+  }
   balance -= amt;
   updateUI();
   closeModal('walletModal');
+  alert('📩 Lệnh rút tiền đã được gửi lên hệ thống!');
 }
 
 window.onload = function() {
@@ -1278,6 +1327,7 @@ window.onload = function() {
   renderDiceScene();
   initBowlDrag();
   initTopList();
+  checkMailboxState();
   startTimer();
 };
 </script>
