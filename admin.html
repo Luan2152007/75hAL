@@ -58,6 +58,8 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
 .status-badge {
@@ -111,6 +113,7 @@ body {
 .btn-xiu { background: linear-gradient(135deg, #38e8ff, #0088cc); color: #000; box-shadow: 0 0 12px #38e8ff; }
 .btn-nohu { background: linear-gradient(135deg, #ffd76a, #ff9100); color: #000; box-shadow: 0 0 12px var(--gold); }
 .btn-danger { background: linear-gradient(135deg, #ff3d67, #c2185b); color: #fff; box-shadow: 0 0 12px #ff3d67; }
+.btn-success { background: linear-gradient(135deg, #00e676, #007e33); color: #000; box-shadow: 0 0 12px #00e676; }
 
 .form-input {
   width: 100%;
@@ -147,9 +150,12 @@ body {
   <div class="glass-panel admin-header">
     <div>
       <h1 class="text-xl font-extrabold text-amber-300">🛡️ GAME ZONE VIP - ADMIN 3D CENTER</h1>
-      <p class="text-xs text-gray-400">Hệ thống điều khiển thuật toán & quản lý người chơi toàn diện</p>
+      <p class="text-xs text-gray-400">Hệ thống điều khiển thuật toán & quản lý người chơi toàn diện (Phiên bản nâng cấp)</p>
     </div>
-    <div class="status-badge">● SERVER ONLINE (18ms)</div>
+    <div class="flex items-center gap-3">
+      <button onclick="exportDataBackup()" class="bg-cyan-500/20 border border-cyan-400 text-cyan-300 px-3 py-1.5 rounded-lg text-xs font-bold">📥 Backup Data</button>
+      <div class="status-badge">● SERVER ONLINE (12ms)</div>
+    </div>
   </div>
 
   <!-- STATS OVERVIEW -->
@@ -169,6 +175,14 @@ body {
     <div class="stat-card">
       <div class="lbl">NGƯỜI CHƠI ONLINE</div>
       <div class="val" style="color:var(--green);" id="onlineUsers">1,284 VIP</div>
+    </div>
+  </div>
+
+  <!-- CHART SECTION -->
+  <div class="glass-panel">
+    <h2 class="font-extrabold text-amber-300 text-sm mb-2">📊 BIỂU ĐỒ BIẾN ĐỘNG DÒNG TIỀN (7 NGÀY QUA)</h2>
+    <div style="height: 220px; position: relative;">
+      <canvas id="revenueChart"></canvas>
     </div>
   </div>
 
@@ -212,7 +226,30 @@ body {
     </div>
   </div>
 
-  <!-- PANEL QUẢN LÝ NGÂN HÀNG NẠP TIỀN (THÊM/SỬA/XÓA STK NHÀ CÁI) -->
+  <!-- PANEL XÉT DUYỆT NẠP / RÚT TIỀN (MỚI) -->
+  <div class="glass-panel">
+    <h2 class="font-extrabold text-amber-300 text-sm mb-2">📥 XÉT DUYỆT LỆNH NẠP / RÚT TIỀN THỰC TẾ</h2>
+    <p class="text-xs text-gray-400 mb-3">Danh sách các yêu cầu nạp tiền hoặc rút tiền từ người chơi đang chờ xử lý:</p>
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>THỜI GIAN</th>
+            <th>TÀI KHOẢN</th>
+            <th>LOẠI GIAO DỊCH</th>
+            <th>SỐ TIỀN</th>
+            <th>NỘI DUNG / STK NHẬN</th>
+            <th>HÀNH ĐỘNG</th>
+          </tr>
+        </thead>
+        <tbody id="transactionTable">
+          <tr><td colspan="6" class="text-center text-gray-400 py-4">Chưa có giao dịch nào chờ duyệt.</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- PANEL QUẢN LÝ NGÂN HÀNG NẠP TIỀN -->
   <div class="glass-panel">
     <h2 class="font-extrabold text-amber-300 text-sm mb-2">🏦 CẤU HÌNH NGÂN HÀNG NẠP TIỀN (VIETQR)</h2>
     <p class="text-xs text-gray-400 mb-3">Thêm hoặc thay đổi tài khoản ngân hàng hiển thị khi người chơi tạo mã nạp tiền VietQR:</p>
@@ -236,9 +273,12 @@ body {
 
   <!-- QUẢN LÝ TÀI KHOẢN NGƯỜI CHƠI THỰC TẾ -->
   <div class="glass-panel">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:10px;">
       <h2 class="font-extrabold text-amber-300 text-sm">💳 DANH SÁCH TÀI KHOẢN NGƯỜI CHƠI TRÊN HỆ THỐNG</h2>
-      <button class="control-btn btn-danger w-auto px-3 py-1" style="margin:0; font-size:10px;" onclick="resetAllUsersBalance()">🔄 RESET TOÀN BỘ SỐ DƯ (VỀ 0Đ)</button>
+      <div class="flex gap-2 items-center">
+        <input type="text" id="searchUserBox" class="form-input mb-0 py-1 text-xs" placeholder="🔍 Tìm kiếm tài khoản..." onkeyup="loadAdminUsers()" style="width: 160px;">
+        <button class="control-btn btn-danger w-auto px-3 py-1" style="margin:0; font-size:10px;" onclick="resetAllUsersBalance()">🔄 RESET SỐ DƯ</button>
+      </div>
     </div>
     <div style="overflow-x:auto;">
       <table class="data-table">
@@ -262,21 +302,53 @@ body {
 <script>
 function formatMoney(num) { return num.toLocaleString('vi-VN') + 'đ'; }
 
-// Hiển thị danh sách tài khoản thực tế từ localStorage vào bảng Admin
+// Khởi tạo biểu đồ thống kê doanh thu mẫu bằng Chart.js
+function initRevenueChart() {
+  const ctx = document.getElementById('revenueChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'Hôm nay'],
+      datasets: [{
+        label: 'Doanh thu hệ thống (VNĐ)',
+        data: [120000000, 190000000, 150000000, 250000000, 310000000, 480000000, 620000000],
+        borderColor: '#ffd76a',
+        backgroundColor: 'rgba(255, 215, 106, 0.1)',
+        borderWidth: 2.5,
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { labels: { color: '#fff', font: { size: 10 } } } },
+      scales: {
+        x: { ticks: { color: '#a2a6cc', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+        y: { ticks: { color: '#a2a6cc', font: { size: 10 } }, grid: { color: 'rgba(255,255,255,0.05)' } }
+      }
+    }
+  });
+}
+
+// Hiển thị danh sách tài khoản thực tế từ localStorage (Có tích hợp tìm kiếm)
 function loadAdminUsers() {
   const tableBody = document.getElementById('adminUserTable');
+  const keyword = document.getElementById('searchUserBox').value.toLowerCase();
   let users = JSON.parse(localStorage.getItem('game_users') || '{}');
   let html = '';
   
-  let count = Object.keys(users).length;
-  document.getElementById('totalUsersCount').innerText = count + ' Users';
+  let keys = Object.keys(users);
+  document.getElementById('totalUsersCount').innerText = keys.length + ' Users';
 
-  if(count === 0) {
-    tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-gray-400 py-4">Chưa có tài khoản nào đăng ký trên hệ thống.</td></tr>`;
+  let filteredKeys = keys.filter(k => k.toLowerCase().includes(keyword) || (users[k].nickname && users[k].nickname.toLowerCase().includes(keyword)));
+
+  if(filteredKeys.length === 0) {
+    tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-gray-400 py-4">Không tìm thấy tài khoản phù hợp.</td></tr>`;
     return;
   }
 
-  for(let username in users) {
+  for(let username of filteredKeys) {
     let u = users[username];
     html += `
       <tr>
@@ -293,7 +365,7 @@ function loadAdminUsers() {
   tableBody.innerHTML = html;
 }
 
-// Lưu cấu hình ngân hàng VietQR để client (index.html) gọi hiển thị mã QR động
+// Lưu cấu hình ngân hàng VietQR
 function saveBankConfig() {
   const bin = document.getElementById('bankBinInput').value.trim();
   const acc = document.getElementById('bankAccInput').value.trim();
@@ -380,10 +452,22 @@ function deleteUser(username) {
   }
 }
 
+function exportDataBackup() {
+  const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(localStorage));
+  const downloadAnchor = document.createElement('a');
+  downloadAnchor.setAttribute("href", dataStr);
+  downloadAnchor.setAttribute("download", "game_system_backup.json");
+  document.body.appendChild(downloadAnchor);
+  downloadAnchor.click();
+  downloadAnchor.remove();
+}
+
 window.onload = function() {
+  initRevenueChart();
   loadAdminUsers();
   loadBankConfig();
-  // Cập nhật ngẫu nhiên số lượng online giả lập cho sinh động
+  
+  // Cập nhật ngẫu nhiên số lượng online giả lập
   setInterval(() => {
     document.getElementById('onlineUsers').innerText = (1200 + Math.floor(Math.random() * 150)) + ' VIP';
   }, 4000);
