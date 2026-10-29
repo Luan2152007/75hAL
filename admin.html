@@ -17,7 +17,7 @@
 
 :root {
   --bg-gradient: radial-gradient(circle at 50% 0%, #15091d 0%, #08030e 60%, #020105 100%);
-  --panel-bg: rgba(20, 10, 30, 0.85);
+  --panel-bg: rgba(20, 10, 30, 0.9);
   --gold: #ffd76a;
   --cyan: #38e8ff;
   --pink: #ff4fd8;
@@ -40,31 +40,31 @@ body {
 .admin-container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 15px;
+  padding: 16px;
 }
 
 /* GLASS PANEL */
 .glass-panel {
   background: var(--panel-bg);
-  border: 1px solid var(--border-color);
-  border-radius: 16px;
-  backdrop-filter: blur(12px);
-  box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px var(--glow-color);
-  padding: 16px;
+  border: 1.5px solid var(--border-color);
+  border-radius: 18px;
+  backdrop-filter: blur(14px);
+  box-shadow: 0 12px 35px rgba(0,0,0,0.85), 0 0 18px var(--glow-color);
+  padding: 18px;
+  margin-bottom: 16px;
 }
 
 .admin-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 20px;
 }
 
 .status-badge {
   background: rgba(0, 230, 118, 0.15);
   border: 1px solid var(--green);
   color: var(--green);
-  padding: 4px 12px;
+  padding: 6px 14px;
   border-radius: 20px;
   font-size: 11px;
   font-weight: bold;
@@ -73,19 +73,19 @@ body {
 /* STATS GRID */
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 12px;
-  margin-bottom: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 14px;
+  margin-bottom: 16px;
 }
 
 .stat-card {
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.08);
-  border-radius: 12px;
-  padding: 12px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 14px;
+  padding: 14px;
 }
-.stat-card .lbl { font-size: 10px; color: #aaa; }
-.stat-card .val { font-size: 18px; font-weight: 900; color: var(--gold); margin-top: 4px; }
+.stat-card .lbl { font-size: 10px; color: #a2a6cc; font-weight: 700; }
+.stat-card .val { font-size: 20px; font-weight: 900; color: var(--gold); margin-top: 6px; }
 
 /* CONTROL GRID */
 .main-grid {
@@ -97,32 +97,32 @@ body {
 
 .control-btn {
   width: 100%;
-  padding: 10px;
-  border-radius: 10px;
+  padding: 11px;
+  border-radius: 12px;
   font-weight: bold;
   font-size: 12px;
   cursor: pointer;
   transition: all 0.2s;
   border: 0;
-  margin-top: 6px;
+  margin-top: 8px;
 }
 
-.btn-tai { background: linear-gradient(135deg, #ff4fd8, #b80086); color: #fff; box-shadow: 0 0 10px #ff4fd8; }
-.btn-xiu { background: linear-gradient(135deg, #38e8ff, #0088cc); color: #000; box-shadow: 0 0 10px #38e8ff; }
-.btn-nohu { background: linear-gradient(135deg, #ffd76a, #ff9100); color: #000; box-shadow: 0 0 10px #ffd76a; }
-.btn-danger { background: linear-gradient(135deg, #ff3d67, #c2185b); color: #fff; box-shadow: 0 0 10px #ff3d67; }
+.btn-tai { background: linear-gradient(135deg, #ff4fd8, #b80086); color: #fff; box-shadow: 0 0 12px #ff4fd8; }
+.btn-xiu { background: linear-gradient(135deg, #38e8ff, #0088cc); color: #000; box-shadow: 0 0 12px #38e8ff; }
+.btn-nohu { background: linear-gradient(135deg, #ffd76a, #ff9100); color: #000; box-shadow: 0 0 12px var(--gold); }
+.btn-danger { background: linear-gradient(135deg, #ff3d67, #c2185b); color: #fff; box-shadow: 0 0 12px #ff3d67; }
 
 .form-input {
   width: 100%;
-  background: rgba(0,0,0,0.5);
-  border: 1px solid var(--border-color);
+  background: rgba(0,0,0,0.6);
+  border: 1.5px solid var(--border-color);
   color: #fff;
-  padding: 8px;
+  padding: 9px;
   border-radius: 8px;
   font-size: 11px;
   outline: none;
   margin-top: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 /* DATA TABLE */
@@ -130,14 +130,14 @@ body {
   width: 100%;
   border-collapse: collapse;
   font-size: 11px;
-  margin-top: 10px;
+  margin-top: 12px;
 }
 .data-table th, .data-table td {
-  padding: 8px;
+  padding: 10px;
   text-align: left;
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
-.data-table th { color: var(--gold); }
+.data-table th { color: var(--gold); background: rgba(0,0,0,0.3); }
 </style>
 </head>
 <body>
@@ -149,22 +149,22 @@ body {
       <h1 class="text-xl font-extrabold text-amber-300">🛡️ GAME ZONE VIP - ADMIN 3D CENTER</h1>
       <p class="text-xs text-gray-400">Hệ thống điều khiển thuật toán & quản lý người chơi toàn diện</p>
     </div>
-    <div class="status-badge">● SERVER ONLINE (256ms)</div>
+    <div class="status-badge">● SERVER ONLINE (18ms)</div>
   </div>
 
   <!-- STATS OVERVIEW -->
   <div class="stats-grid">
     <div class="stat-card">
-      <div class="lbl">TỔNG DOANH THU</div>
+      <div class="lbl">TỔNG DOANH THU HỆ THỐNG</div>
       <div class="val" id="totalRevenue">8,450,200,000đ</div>
     </div>
     <div class="stat-card">
-      <div class="lbl">TỔNG TIỀN CƯỢC PHIÊN HIỆN TẠI</div>
-      <div class="val" style="color:var(--cyan);" id="currentBetTotal">550,000,000đ</div>
+      <div class="lbl">SỐ LƯỢNG TÀI KHOẢN ĐĂNG KÝ</div>
+      <div class="val" style="color:var(--cyan);" id="totalUsersCount">0</div>
     </div>
     <div class="stat-card">
       <div class="lbl">QUỸ NỔ HŨ TÍCH LŨY</div>
-      <div class="val" style="color:var(--pink);" id="jackpotPool">1,024,500,000đ</div>
+      <div class="val" style="color:var(--pink);" id="jackpotPoolAdmin">1,024,500,000đ</div>
     </div>
     <div class="stat-card">
       <div class="lbl">NGƯỜI CHƠI ONLINE</div>
@@ -177,7 +177,7 @@ body {
     <!-- PANEL CAN THIỆP KẾT QUẢ GAME -->
     <div class="glass-panel">
       <h2 class="font-extrabold text-amber-300 text-sm mb-2">⚡ CAN THIỆP KẾT QUẢ TÀI XỈU 3D</h2>
-      <p class="text-xs text-gray-400 mb-3">Điều chỉnh kết quả phiên tiếp theo để cân bằng phế nhà cái:</p>
+      <p class="text-xs text-gray-400 mb-3">Điều chỉnh kết quả phiên tiếp theo để kiểm soát tỷ lệ nhà cái:</p>
       
       <div class="grid grid-cols-2 gap-2">
         <button class="control-btn btn-tai" onclick="setForceResult('TAI')">BẮT BUỘC RA TÀI (11-18)</button>
@@ -185,7 +185,7 @@ body {
       </div>
       <button class="control-btn btn-nohu mt-2" onclick="setForceResult('JACKPOT')">💥 BẮT BUỘC NỔ HŨ 1B (666 / 111)</button>
 
-      <div class="mt-4 p-3 bg-black/40 rounded-lg">
+      <div class="mt-4 p-3 bg-black/40 rounded-lg border border-white/10">
         <div class="text-xs font-bold text-gray-300">Trạng thái can thiệp phiên hiện tại:</div>
         <div class="text-sm font-extrabold text-amber-400 mt-1" id="currentForceStatus">Đang chạy Thuật toán Ngẫu nhiên (Auto)</div>
       </div>
@@ -197,7 +197,7 @@ body {
       
       <label class="text-xs text-gray-400">Tạo Mã Giftcode Mới:</label>
       <div class="flex gap-2">
-        <input type="text" id="newCodeInput" class="form-input mb-0" placeholder="VD: TRIANVIP100K" value="TRIANVIP100K">
+        <input type="text" id="newCodeInput" class="form-input mb-0" placeholder="VD: TRIANVIP100K" value="GAMEZONE2026">
         <button class="control-btn btn-tai w-auto px-4 mt-1" onclick="createGiftcode()">TẠO CODE</button>
       </div>
 
@@ -212,62 +212,133 @@ body {
     </div>
   </div>
 
-  <!-- QUẢN LÝ TÀI KHOẢN & RESET SỐ DƯ -->
-  <div class="glass-panel mt-4">
-    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px;">
-      <h2 class="font-extrabold text-amber-300 text-sm">💳 QUẢN LÝ TÀI KHOẢN & RESET SỐ DƯ NGƯỜI CHƠI</h2>
+  <!-- PANEL QUẢN LÝ NGÂN HÀNG NẠP TIỀN (THÊM/SỬA/XÓA STK NHÀ CÁI) -->
+  <div class="glass-panel">
+    <h2 class="font-extrabold text-amber-300 text-sm mb-2">🏦 CẤU HÌNH NGÂN HÀNG NẠP TIỀN (VIETQR)</h2>
+    <p class="text-xs text-gray-400 mb-3">Thêm hoặc thay đổi tài khoản ngân hàng hiển thị khi người chơi tạo mã nạp tiền VietQR:</p>
+    
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+      <div>
+        <label class="text-xs text-gray-400">Mã Ngân Hàng (VD: 970422 - MB, 970436 - VCB):</label>
+        <input type="text" id="bankBinInput" class="form-input" placeholder="VD: 970422" value="970422">
+      </div>
+      <div>
+        <label class="text-xs text-gray-400">Số Tài Khoản Nhận:</label>
+        <input type="text" id="bankAccInput" class="form-input" placeholder="VD: 99999975AL" value="99999975AL">
+      </div>
+      <div>
+        <label class="text-xs text-gray-400">Tên Chủ Tài Khoản (Không dấu):</label>
+        <input type="text" id="bankNameInput" class="form-input" placeholder="VD: NGUYEN VAN VIP" value="NGUYEN VAN VIP">
+      </div>
+    </div>
+    <button class="control-btn btn-nohu mt-1" onclick="saveBankConfig()">LƯU CẤU HÌNH NGÂN HÀNG NHẬN TIỀN</button>
+  </div>
+
+  <!-- QUẢN LÝ TÀI KHOẢN NGƯỜI CHƠI THỰC TẾ -->
+  <div class="glass-panel">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <h2 class="font-extrabold text-amber-300 text-sm">💳 DANH SÁCH TÀI KHOẢN NGƯỜI CHƠI TRÊN HỆ THỐNG</h2>
       <button class="control-btn btn-danger w-auto px-3 py-1" style="margin:0; font-size:10px;" onclick="resetAllUsersBalance()">🔄 RESET TOÀN BỘ SỐ DƯ (VỀ 0Đ)</button>
     </div>
-    <table class="data-table">
-      <thead>
-        <tr>
-          <th>TÊN TÀI KHOẢN</th>
-          <th>SỐ DƯ</th>
-          <th>STK / NGÂN HÀNG</th>
-          <th>SỐ TIỀN RÚT</th>
-          <th>TRẠNG THÁI</th>
-          <th>THAO TÁC</th>
-        </tr>
-      </thead>
-      <tbody id="adminUserTable">
-        <tr>
-          <td>VIP_Superstar</td>
-          <td>58,400,000đ</td>
-          <td>99999999 - MBBank</td>
-          <td>10,000,000đ</td>
-          <td><span class="text-amber-300 font-bold">Chờ duyệt</span></td>
-          <td>
-            <button class="bg-emerald-500 text-black px-2 py-1 rounded text-xs font-bold" onclick="approveWithdraw(this)">Duyệt Rút</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <div style="overflow-x:auto;">
+      <table class="data-table">
+        <thead>
+          <tr>
+            <th>TÊN TÀI KHOẢN</th>
+            <th>TÊN HIỂN THỊ (NICKNAME)</th>
+            <th>SỐ DƯ HIỆN TẠI</th>
+            <th>MẬT KHẨU</th>
+            <th>THAO TÁC NƠI ADMIN</th>
+          </tr>
+        </thead>
+        <tbody id="adminUserTable">
+          <!-- Dữ liệu render tự động từ localStorage -->
+        </tbody>
+      </table>
+    </div>
   </div>
 </div>
 
 <script>
-let forcedMode = 'AUTO';
+function formatMoney(num) { return num.toLocaleString('vi-VN') + 'đ'; }
+
+// Hiển thị danh sách tài khoản thực tế từ localStorage vào bảng Admin
+function loadAdminUsers() {
+  const tableBody = document.getElementById('adminUserTable');
+  let users = JSON.parse(localStorage.getItem('game_users') || '{}');
+  let html = '';
+  
+  let count = Object.keys(users).length;
+  document.getElementById('totalUsersCount').innerText = count + ' Users';
+
+  if(count === 0) {
+    tableBody.innerHTML = `<tr><td colspan="5" class="text-center text-gray-400 py-4">Chưa có tài khoản nào đăng ký trên hệ thống.</td></tr>`;
+    return;
+  }
+
+  for(let username in users) {
+    let u = users[username];
+    html += `
+      <tr>
+        <td class="font-bold text-cyan-300">${username}</td>
+        <td>${u.nickname || '--'}</td>
+        <td class="font-extrabold text-amber-300">${formatMoney(u.balance || 0)}</td>
+        <td class="text-gray-400">${u.password}</td>
+        <td>
+          <button class="bg-red-500 text-white px-2.5 py-1 rounded text-xs font-bold" onclick="deleteUser('${username}')">Xóa TK</button>
+        </td>
+      </tr>
+    `;
+  }
+  tableBody.innerHTML = html;
+}
+
+// Lưu cấu hình ngân hàng VietQR để client (index.html) gọi hiển thị mã QR động
+function saveBankConfig() {
+  const bin = document.getElementById('bankBinInput').value.trim();
+  const acc = document.getElementById('bankAccInput').value.trim();
+  const name = document.getElementById('bankNameInput').value.trim();
+
+  if(!bin || !acc || !name) {
+    alert('Vui lòng điền đầy đủ thông tin ngân hàng!');
+    return;
+  }
+
+  const bankConfig = { bin: bin, acc: acc, name: name };
+  localStorage.setItem('game_bank_config', JSON.stringify(bankConfig));
+  alert('🏦 Đã cập nhật thông tin ngân hàng nhận tiền nạp thành công!');
+}
+
+function loadBankConfig() {
+  let saved = localStorage.getItem('game_bank_config');
+  if(saved) {
+    let cfg = JSON.parse(saved);
+    document.getElementById('bankBinInput').value = cfg.bin || '970422';
+    document.getElementById('bankAccInput').value = cfg.acc || '99999975AL';
+    document.getElementById('bankNameInput').value = cfg.name || 'NGUYEN VAN VIP';
+  }
+}
 
 function setForceResult(mode) {
-  forcedMode = mode;
+  localStorage.setItem('admin_forced_mode', mode);
   const statusEl = document.getElementById('currentForceStatus');
   if (mode === 'TAI') {
-    statusEl.innerText = '🔥 ĐÃ ÉP KẾT QUẢ: RA TÀI (11-18)';
+    statusEl.innerText = '🔥 ĐÃ ÉP KẾT QUẢ PHIÊN SAU: RA TÀI (11-18)';
     statusEl.style.color = 'var(--pink)';
   } else if (mode === 'XIU') {
-    statusEl.innerText = '⚡ ĐÃ ÉP KẾT QUẢ: RA XỈU (3-10)';
+    statusEl.innerText = '⚡ ĐÃ ÉP KẾT QUẢ PHIÊN SAU: RA XỈU (3-10)';
     statusEl.style.color = 'var(--cyan)';
   } else if (mode === 'JACKPOT') {
-    statusEl.innerText = '💥 ĐÃ ÉP KẾT QUẢ: NỔ HŨ 1B (666 / 111)';
+    statusEl.innerText = '💥 ĐÃ ÉP KẾT QUẢ PHIÊN SAU: NỔ HŨ 1B (666 / 111)';
     statusEl.style.color = 'var(--gold)';
   }
-  alert(`✅ Đã thiết lập chế độ can thiệp: ${mode}`);
+  alert(`✅ Đã thiết lập chế độ can thiệp thành công: ${mode}`);
 }
 
 function createGiftcode() {
   const code = document.getElementById('newCodeInput').value.trim();
   if(!code) return;
-  alert(`🎉 Tạo thành công Giftcode: ${code}`);
+  alert(`🎉 Tạo và kích hoạt thành công mã Giftcode: ${code}`);
 }
 
 function sendServerMail() {
@@ -280,12 +351,11 @@ function sendServerMail() {
     return;
   }
 
-  // Lưu thông tin thư vào localStorage để client (index.html) nhận diện và hiển thị vào hòm thư
   let serverMails = JSON.parse(localStorage.getItem('game_server_mails') || '[]');
   serverMails.unshift({ title: title, content: content, reward: amt, time: 'Vừa xong' });
   localStorage.setItem('game_server_mails', JSON.stringify(serverMails));
 
-  alert(`📫 Đã gửi thông báo & quà (+${amt.toLocaleString('vi-VN')}đ) vào hòm thư toàn server thành công!`);
+  alert(`📫 Đã gửi thông báo & quà (+${formatMoney(amt)}) vào hòm thư toàn server thành công!`);
 }
 
 function resetAllUsersBalance() {
@@ -295,16 +365,29 @@ function resetAllUsersBalance() {
       users[acc].balance = 0;
     }
     localStorage.setItem('game_users', JSON.stringify(users));
+    loadAdminUsers();
     alert('🔄 Đã reset toàn bộ số dư tài khoản người chơi thành công!');
   }
 }
 
-function approveWithdraw(btn) {
-  const tr = btn.closest('tr');
-  tr.cells[4].innerHTML = '<span class="text-emerald-400 font-bold">Đã Duyệt</span>';
-  btn.parentElement.innerHTML = '<span class="text-gray-400 text-xs">Hoàn thành</span>';
-  alert('✅ Đã duyệt lệnh rút tiền thành công!');
+function deleteUser(username) {
+  if(confirm(`⚠️ Bạn có chắc chắn muốn xóa tài khoản [${username}] khỏi hệ thống?`)) {
+    let users = JSON.parse(localStorage.getItem('game_users') || '{}');
+    delete users[username];
+    localStorage.setItem('game_users', JSON.stringify(users));
+    loadAdminUsers();
+    alert(`🗑️ Đã xóa tài khoản ${username} thành công!`);
+  }
 }
+
+window.onload = function() {
+  loadAdminUsers();
+  loadBankConfig();
+  // Cập nhật ngẫu nhiên số lượng online giả lập cho sinh động
+  setInterval(() => {
+    document.getElementById('onlineUsers').innerText = (1200 + Math.floor(Math.random() * 150)) + ' VIP';
+  }, 4000);
+};
 </script>
 </body>
 </html>
